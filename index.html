@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الأذكار والأدعية</title>
+<link rel="icon" type="image/png" href="pattern.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0d1a0f">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="الأذكار والأدعية">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --gold-dark: #8a6d2f;
+    --deep: #0d1a0f;
+    --surface: #162019;
+    --surface2: #1c2a1f;
+    --text: #f0e8d0;
+    --text-muted: #a89870;
+    --green: #2e6b3e;
+    --green-light: #3d8a52;
+    --emerald: #4caf70;
+    --fs-dhikr: clamp(1.5rem, 2.8vw, 2.2rem);
+    --fs-label: clamp(1.3rem, 1.6vw, 1.1rem);
+    --fs-count: clamp(3.5rem, 7vw, 5.5rem);
+    --fs-tap: clamp(1.5rem, 2.8vw, 2rem);
+  }
+
+  /* ===== MORNING LIGHT THEME ===== */
+  body.theme-morning {
+    --deep: #faf6ee;
+    --surface: #ffffff;
+    --surface2: #fdf8f0;
+    --text: #2c1f0e;
+    --text-muted: #8a6d3a;
+    --emerald: #2e7d4f;
+  }
+  body.theme-morning::before {
+    background:
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(255,210,100,0.3) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 60% at 80% 100%, rgba(255,180,50,0.12) 0%, transparent 50%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(201,168,76,0.1) 0%, transparent 50%);
+  }
+  body.theme-morning::after {
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(201,168,76,0.04) 40px, rgba(201,168,76,0.04) 41px),
+      repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(201,168,76,0.04) 40px, rgba(201,168,76,0.04) 41px);
+  }
+  body.theme-morning .star { background: var(--gold-dark); }
+  body.theme-morning .dhikr-card {
+    background: linear-gradient(145deg, #ffffff 0%, #fdf8f0 100%);
+    border-color: rgba(201,168,76,0.35);
+    box-shadow: 0 0 0 1px rgba(201,168,76,0.1), 0 20px 60px rgba(180,140,50,0.15), inset 0 1px 0 rgba(201,168,76,0.2);
+  }
+  body.theme-morning .dhikr-text { text-shadow: none; color: #1a1000; }
+  body.theme-morning .dhikr-repeat-info { background: rgba(201,168,76,0.12); border-color: rgba(201,168,76,0.3); }
+  body.theme-morning .back-btn { border-color: rgba(150,110,30,0.3); color: var(--text-muted); }
+  body.theme-morning .back-btn:hover { border-color: var(--gold-dark); color: var(--gold-dark); }
+  body.theme-morning .toggle-btn { background: rgba(201,168,76,0.15); border-color: rgba(150,110,30,0.35); color: var(--gold-dark); }
+  body.theme-morning .nav-arrow-btn { border-color: rgba(150,110,30,0.3); background: rgba(201,168,76,0.08); color: var(--gold-dark); }
+  body.theme-morning .nav-arrow-btn:hover { background: rgba(201,168,76,0.2); border-color: var(--gold-dark); }
+  body.theme-morning .dot { background: rgba(150,110,30,0.2); }
+  body.theme-morning .dot.done { background: var(--gold-dark); box-shadow: 0 0 4px rgba(150,110,30,0.4); }
+  body.theme-morning .dot.current { background: #2e7d4f; box-shadow: 0 0 6px rgba(46,125,79,0.5); }
+  body.theme-morning .count-current { color: var(--gold-dark); }
+  body.theme-morning .count-separator, body.theme-morning .count-total { color: var(--text-muted); }
+  body.theme-morning .tap-btn-inner {
+    background: linear-gradient(145deg, var(--gold-dark) 0%, var(--gold) 100%);
+    box-shadow: 0 0 0 1px rgba(201,168,76,0.3), 0 8px 30px rgba(180,140,50,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+  body.theme-morning .tap-btn:active .tap-btn-inner {
+    box-shadow: 0 0 0 1px rgba(201,168,76,0.3), 0 3px 15px rgba(180,140,50,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+  body.theme-morning .ripple {
+    background: radial-gradient(circle, rgba(201,168,76,0.3) 0%, transparent 70%);
+  }
+  body.theme-morning .pulse-anim .tap-btn-inner {
+    animation: completePulseGold 0.5s ease-out;
+  }
+  @keyframes completePulseGold {
+    0%{box-shadow:0 0 0 0 rgba(201,168,76,0.5)}
+    70%{box-shadow:0 0 0 20px rgba(201,168,76,0)}
+    100%{box-shadow:0 0 0 0 rgba(201,168,76,0)}
+  }
+  body.theme-morning .dot.current { background: var(--gold-dark); box-shadow: 0 0 6px rgba(150,110,30,0.5); }
+  body.theme-morning .tap-btn-ring { border-color: rgba(150,110,30,0.4); }
+  body.theme-morning .tap-btn-ring-2 { border-color: rgba(150,110,30,0.2); }
+  body.theme-morning .tap-btn:active .tap-btn-ring { border-color: var(--gold-dark); }
+  body.theme-morning .progress-bar-container { background: rgba(150,110,30,0.12); }
+  body.theme-morning #completionScreen { background: #faf6ee; }
+  body.theme-morning #installBanner {
+    background: linear-gradient(135deg, #ffffff 0%, #fdf8f0 100%);
+    border-top-color: rgba(201,168,76,0.3);
+    box-shadow: 0 -8px 30px rgba(180,140,50,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    height: 100%;
+    background: var(--deep);
+    color: var(--text);
+    font-family: 'Noto Naskh Arabic', serif;
+    overflow: hidden;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(201,168,76,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 60% at 80% 100%, rgba(46,107,62,0.15) 0%, transparent 50%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(201,168,76,0.07) 0%, transparent 50%);
+    pointer-events: none; z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(201,168,76,0.015) 40px, rgba(201,168,76,0.015) 41px),
+      repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(201,168,76,0.015) 40px, rgba(201,168,76,0.015) 41px);
+    pointer-events: none; z-index: 0;
+  }
+
+  .star {
+    position: fixed; width: 2px; height: 2px; border-radius: 50%;
+    background: var(--gold-light);
+    animation: twinkle var(--dur) ease-in-out infinite;
+    animation-delay: var(--delay); opacity: 0.2;
+  }
+  @keyframes twinkle { 0%,100%{opacity:0.2} 50%{opacity:0.8} }
+
+  /* ===== SCREENS ===== */
+  .screen {
+    position: fixed; inset: 0; z-index: 10;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+  .screen.active { opacity: 1; pointer-events: all; }
+
+  /* ===== SELECTION SCREEN ===== */
+  #selectionScreen { padding: 0; justify-content: flex-start; overflow-y: auto; }
+
+  .selection-inner {
+    width: 100%; max-width: 520px;
+    margin: 0 auto;
+    display: flex; flex-direction: column;
+    align-items: center; gap: 24px;
+    padding: 28px 20px 50px;
+  }
+
+  .selection-header { text-align: center; }
+
+  .selection-bismillah {
+    font-family: 'Amiri', serif;
+    font-size: clamp(1.5rem, 10vw, 3rem);
+    color: var(--gold);
+    text-shadow: 0 0 20px rgba(201,168,76,0.3);
+    display: block; margin-bottom: 8px;
+  }
+
+  .selection-title {
+    font-family: 'Amiri', serif;
+    font-size: clamp(1rem, 5vw, 1.5rem);
+    color: var(--text-muted);
+  }
+
+  .ornament {
+    display: flex; align-items: center; gap: 12px;
+    width: 100%; max-width: 260px;
+  }
+  .ornament-line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(201,168,76,0.35)); }
+  .ornament-line.r { background: linear-gradient(90deg, rgba(201,168,76,0.35), transparent); }
+  .ornament-star { color: var(--gold); font-size: 0.6rem; opacity: 0.6; }
+
+  /* ===== THEME TOGGLE PILL ===== */
+  .theme-toggle-wrap {
+    display: flex; flex-direction: column;
+    align-items: center; gap: 10px;
+  }
+  .theme-toggle-label {
+    font-family: 'Amiri', serif;
+    font-size: clamp(1.2rem, 1.6vw, 1rem);
+    color: var(--text-muted);
+    opacity: 0.8;
+  }
+  .theme-pills {
+    display: flex; align-items: center;
+    background: rgba(201,168,76,0.07);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 50px;
+    padding: 4px;
+    gap: 4px;
+  }
+  .theme-pill {
+    font-family: 'Noto Naskh Arabic', serif;
+    font-size: clamp(1rem, 1.5vw, 0.95rem);
+    padding: 7px 20px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    background: transparent;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+  .theme-pill.active {
+    background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+    color: #fff;
+    box-shadow: 0 2px 10px rgba(201,168,76,0.35);
+  }
+  .theme-pill:not(.active):hover { color: var(--gold); }
+
+  .categories-grid { width: 100%; display: flex; flex-direction: column; gap: 13px; }
+
+  .category-btn {
+    width: 100%;
+    background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%);
+    border: 1px solid rgba(201,168,76,0.18);
+    border-radius: 18px; padding: 18px 20px;
+    cursor: pointer;
+    display: flex; align-items: center; gap: 15px;
+    text-align: right;
+    transition: all 0.25s ease;
+    position: relative; overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    animation: fadeSlideUp 0.4s ease forwards;
+    animation-fill-mode: both; opacity: 0;
+  }
+  .category-btn:nth-child(1){animation-delay:0.05s}
+  .category-btn:nth-child(2){animation-delay:0.13s}
+  .category-btn:nth-child(3){animation-delay:0.21s}
+  .category-btn:nth-child(4){animation-delay:0.29s}
+
+  .category-btn:hover, .category-btn:active {
+    transform: translateY(-2px);
+    border-color: rgba(201,168,76,0.45);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4), 0 0 0 1px var(--cat-accent, var(--gold)) inset;
+  }
+
+  .cat-icon-wrap {
+    width: 50px; height: 50px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.55rem; flex-shrink: 0;
+    border: 1px solid var(--cat-border, rgba(201,168,76,0.15));
+    background: var(--cat-bg, rgba(201,168,76,0.1));
+  }
+
+  .cat-text { flex: 1; display: flex; flex-direction: column; }
+  .cat-name { font-family: 'Amiri', serif; font-size: clamp(1.2rem, 2.5vw, 1.6rem); color: var(--gold); }
+  .cat-arrow { color: var(--gold); opacity: 0.6; font-size: clamp(1.1rem, 2vw, 1.4rem); flex-shrink: 0; }
+
+  body.theme-morning .cat-name { color: var(--gold-dark); }
+  body.theme-morning .cat-arrow { color: var(--gold-dark); }
+
+  .morning { --cat-bg:rgba(201,168,76,0.08); --cat-border:rgba(201,168,76,0.18); }
+  .evening { --cat-bg:rgba(201,168,76,0.08); --cat-border:rgba(201,168,76,0.18); }
+  .sleep   { --cat-bg:rgba(201,168,76,0.08); --cat-border:rgba(201,168,76,0.18); }
+  .general { --cat-bg:rgba(201,168,76,0.08); --cat-border:rgba(201,168,76,0.18); }
+
+  /* ===== DHIKR SCREEN ===== */
+  #dhikrScreen { padding: 0; overflow-y: hidden;}
+  #dhikrScreen.source-open {
+  overflow-y: auto;
+}
+
+  .app {
+    position: relative; z-index: 1;
+    height: 100vh; width: 100%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: space-between;
+    max-width: 600px; margin: 0 auto;
+  }
+
+  /* ===== HEADER ===== */
+  .header { width: 100%; padding: 16px 20px 10px; text-align: center; }
+
+  .header-top {
+    display: flex; align-items: center;
+    justify-content: space-between; margin-bottom: 8px;
+    gap: 8px;
+  }
+
+  .back-btn {
+    background: transparent;
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 10px; color: var(--text-muted);
+    font-size: clamp(0.7rem, 1.4vw, 0.85rem);
+    padding: 5px 11px;
+    cursor: pointer; font-family: 'Noto Naskh Arabic', serif;
+    transition: all 0.2s ease; white-space: nowrap;
+  }
+  .back-btn:hover { border-color: rgba(201,168,76,0.5); color: var(--gold); }
+
+  .header-title {
+    font-family: 'Amiri', serif;
+    font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+    color: var(--gold); opacity: 0.9; flex: 1; text-align: center;
+    position: absolute; left: 0; right: 0;
+    z-index: -1;
+  }
+
+  /* Toggle button morning/evening - hidden in header, not used */
+  .toggle-btn { display: none; }
+
+  .progress-bar-container {
+    width: 100%; height: 2px;
+    background: rgba(201,168,76,0.1);
+    border-radius: 2px; overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-dark), var(--gold-light));
+    border-radius: 2px; transition: width 0.4s ease;
+  }
+
+  .dot-indicators {
+    display: flex; gap: 5px; align-items: center;
+    justify-content: center; flex-wrap: wrap;
+    width: 100%;
+    max-width: 340px; margin: 6px auto 0;
+  }
+
+  .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: rgba(201,168,76,0.2); transition: all 0.3s ease;
+  }
+  .dot.done { background: var(--gold); box-shadow: 0 0 4px rgba(201,168,76,0.5); }
+  .dot.current { background: var(--emerald); box-shadow: 0 0 6px rgba(76,175,112,0.6); transform: scale(1.3); }
+
+  /* ===== CARD ===== */
+  .card-area {
+    flex: 1; width: 100%;
+    display: flex; align-items: center; justify-content: center;
+    padding: 0 20px;
+    overflow: visible;
+  }
+
+  .dhikr-card {
+    width: 100%;
+    background: linear-gradient(145deg, var(--surface) 0%, var(--surface2) 100%);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 24px; padding: 28px 24px;
+    text-align: center; position: relative; overflow: visible;
+    box-shadow: 0 0 0 1px rgba(201,168,76,0.05), 0 20px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(201,168,76,0.1);
+    max-height: 45vh;
+    overflow: hidden;
+  }
+
+  .dhikr-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201,168,76,0.4), transparent);
+  }
+
+  .dhikr-card::after {
+    content: '✦'; position: absolute; top: 13px; left: 50%; transform: translateX(-50%);
+    color: rgba(201,168,76,0.2); font-size: 0.55rem; letter-spacing: 8px;
+  }
+
+  .card-number {
+    font-family: 'Amiri', serif;
+    font-size: clamp(0.72rem, 1.3vw, 0.9rem);
+    color: var(--gold); opacity: 0.7;
+    margin-bottom: 13px; margin-top: 5px;
+  }
+
+  .dhikr-text {
+    font-family: 'Amiri', serif;
+    font-size: var(--fs-dhikr);
+    line-height: 2.1; color: var(--text);
+    margin-bottom: 16px;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    white-space: pre-line;
+  }
+
+  /* ===== SOURCE BOX ===== */
+  .source-box {
+    display: inline-block;
+    width: 200px;
+    cursor: pointer;
+    background: rgba(201,168,76,0.08);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 14px;
+    padding: 8px 18px;
+    transition: all 0.3s ease;
+    overflow: visible;
+  }
+  .source-box:hover { background: rgba(201,168,76,0.13); border-color: rgba(201,168,76,0.35); }
+
+  .source-pill {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    font-size: var(--fs-label); color: var(--gold);
+    font-family: 'Amiri', serif;
+  }
+  .source-pill .arrow {
+    font-size: 0.8em;
+    transition: transform 0.3s ease;
+    opacity: 0.6;
+  }
+  .source-box.open {width:fit-content; min-width: 200px; height: fit-content;}
+  .source-box.open .source-pill .arrow { transform: rotate(180deg);}
+
+  .source-text {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, margin-top 0.3s ease;
+    font-family: 'Amiri', serif;
+    font-size: clamp(1.5rem, 1.5vw, 1.05rem);
+    color: var(--text-muted);
+    line-height: 1.8;
+    text-align: center;
+    margin-top: 0;
+  }
+  .source-box.open .source-text {
+    max-height: 1000px;
+    margin-top: 8px;
+    overflow:visible;
+  }
+
+  body.theme-morning .source-box { background: rgba(201,168,76,0.1); border-color: rgba(150,110,30,0.25); }
+  body.theme-morning .source-box:hover { background: rgba(201,168,76,0.18); }
+  body.theme-morning .source-text { color: var(--text-muted); }
+
+  /* ===== NAV ARROWS + COUNT ===== */
+  .count-nav-section {
+    width: 100%; padding: 4px 20px;
+    display: flex; align-items: center; justify-content: center;
+    gap: 20px;
+  }
+
+  .nav-arrow-btn {
+    width: 44px; height: 44px; border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.25);
+    background: rgba(201,168,76,0.06);
+    color: var(--gold);
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+  .nav-arrow-btn:hover { background: rgba(201,168,76,0.15); border-color: rgba(201,168,76,0.5); }
+  .nav-arrow-btn:active { transform: scale(0.92); }
+  .nav-arrow-btn:disabled { opacity: 0.2; cursor: default; }
+  .nav-arrow-btn:disabled:hover { background: rgba(201,168,76,0.06); border-color: rgba(201,168,76,0.25); transform: none; }
+
+  .count-display { display: flex; align-items: baseline; gap: 6px; }
+
+  .count-current {
+    font-family: 'Amiri', serif;
+    font-size: var(--fs-count);
+    color: var(--gold-light); line-height: 1;
+  }
+
+  .count-separator { font-size: clamp(1.2rem, 2.5vw, 1.6rem); color: var(--text-muted); opacity: 0.5; }
+  .count-total { font-family: 'Amiri', serif; font-size: clamp(1.3rem, 2.5vw, 1.7rem); color: var(--text-muted); opacity: 0.7; }
+
+  /* ===== TAP BUTTON ===== */
+  .tap-area {
+    width: 100%; padding: 0 20px 28px;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .tap-btn {
+    width: clamp(110px, 20vw, 140px);
+    height: clamp(110px, 20vw, 140px);
+    border-radius: 50%;
+    border: none; cursor: pointer; position: relative;
+    background: transparent; outline: none;
+    -webkit-appearance: none;
+    appearance:none;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .tap-btn-ring {
+    position: absolute; inset: 0; border-radius: 50%;
+    border: 2px solid rgba(201,168,76,0.3); transition: all 0.2s ease;
+  }
+
+  .tap-btn-ring-2 {
+    position: absolute; inset: 8px; border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.15); transition: all 0.2s ease;
+  }
+
+  .tap-btn-inner {
+    width: calc(100% - 28px);
+    height: calc(100% - 28px);
+    border-radius: 50%;
+    background: linear-gradient(145deg, var(--green) 0%, var(--green-light) 100%);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 0 1px rgba(76,175,112,0.2), 0 8px 30px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+    transition: all 0.15s ease; position: relative; z-index: 1;
+  }
+
+  .tap-label {
+    font-family: 'Amiri', serif;
+    font-size: var(--fs-tap);
+    color: rgba(255,255,255,0.92);
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  }
+
+  .tap-btn:active .tap-btn-inner {
+    transform: scale(0.93);
+    box-shadow: 0 0 0 1px rgba(76,175,112,0.2), 0 3px 15px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+  }
+  .tap-btn:active .tap-btn-ring { border-color: rgba(201,168,76,0.7); }
+
+  @keyframes ripple { 0%{transform:scale(1);opacity:0.6} 100%{transform:scale(2.5);opacity:0} }
+  .ripple {
+    position: absolute; inset: 0; border-radius: 50%;
+    background: radial-gradient(circle, rgba(76,175,112,0.3) 0%, transparent 70%);
+    animation: ripple 0.5s ease-out forwards; pointer-events: none;
+  }
+
+  /* ===== COMPLETION ===== */
+  #completionScreen { background: var(--deep); gap: 22px; padding: 32px; text-align: center; }
+
+  .completion-icon { font-size: clamp(3rem, 6vw, 4.5rem); animation: float 3s ease-in-out infinite; }
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+
+  .completion-title {
+    font-family: 'Amiri', serif;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    color: var(--gold); text-shadow: 0 0 30px rgba(201,168,76,0.3);
+  }
+
+  .completion-subtitle { font-size: clamp(0.9rem, 1.8vw, 1.1rem); color: var(--text-muted); line-height: 1.8; }
+
+  .completion-buttons {
+    display: flex; flex-direction: column; gap: 11px;
+    width: 100%; max-width: 250px; margin-top: 4px;
+  }
+
+  .restart-btn, .home-btn {
+    background: transparent;
+    border: 1px solid rgba(201,168,76,0.4);
+    color: var(--gold);
+    font-family: 'Noto Naskh Arabic', serif;
+    font-size: clamp(0.85rem, 1.5vw, 1rem);
+    padding: 11px 28px; border-radius: 50px; cursor: pointer;
+    transition: all 0.2s ease; width: 100%;
+  }
+  .home-btn { border-color: rgba(201,168,76,0.2); color: var(--text-muted); }
+  .restart-btn:hover { background: rgba(201,168,76,0.1); border-color: var(--gold); }
+  .home-btn:hover { background: rgba(255,255,255,0.04); border-color: rgba(201,168,76,0.4); color: var(--text); }
+
+  /* ===== INSTALL BANNER ===== */
+  #installBanner {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    z-index: 200;
+    background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%);
+    border-top: 1px solid rgba(201,168,76,0.25);
+    padding: 14px 20px;
+    display: flex; align-items: center; gap: 12px;
+    justify-content: space-between;
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+    box-shadow: 0 -8px 30px rgba(0,0,0,0.4);
+  }
+  #installBanner.show { transform: translateY(0); }
+
+  .install-text { flex: 1; }
+  .install-title { font-family: 'Amiri', serif; font-size: 1rem; color: var(--gold); margin-bottom: 2px; }
+  .install-sub { font-size: 0.75rem; color: var(--text-muted); }
+
+  .install-btn {
+    background: linear-gradient(135deg, var(--green), var(--green-light));
+    border: none; border-radius: 12px;
+    color: white; font-family: 'Noto Naskh Arabic', serif;
+    font-size: 0.9rem; padding: 9px 18px;
+    cursor: pointer; white-space: nowrap;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 15px rgba(46,107,62,0.4);
+  }
+  .install-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(46,107,62,0.5); }
+  body.theme-morning .install-btn {
+    background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+    box-shadow: 0 4px 15px rgba(150,110,30,0.35);
+  }
+  body.theme-morning .install-btn:hover { box-shadow: 0 6px 20px rgba(150,110,30,0.5); }
+
+  .install-dismiss {
+    background: transparent; border: none;
+    color: var(--text-muted); font-size: 1.2rem;
+    cursor: pointer; padding: 4px 6px;
+    transition: color 0.2s ease;
+  }
+  .install-dismiss:hover { color: var(--text); }
+
+  /* Animations */
+  @keyframes slideInRight { from{opacity:0;transform:translateX(-30px)} to{opacity:1;transform:translateX(0)} }
+  .slide-in { animation: slideInRight 0.35s cubic-bezier(0.25,0.46,0.45,0.94) forwards; }
+
+  @keyframes completePulse {
+    0%{box-shadow:0 0 0 0 rgba(76,175,112,0.5)}
+    70%{box-shadow:0 0 0 20px rgba(76,175,112,0)}
+    100%{box-shadow:0 0 0 0 rgba(76,175,112,0)}
+  }
+  .pulse-anim .tap-btn-inner { animation: completePulse 0.5s ease-out; }
+
+  @keyframes countBounce { 0%{transform:scale(1)} 40%{transform:scale(1.2)} 100%{transform:scale(1)} }
+  .count-bounce { animation: countBounce 0.2s ease-out; }
+
+  @keyframes fadeSlideUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+  .fade-up { animation: fadeSlideUp 0.4s ease forwards; }
+
+  /* ===== BOTTOM INFO BOX ===== */
+  .info-box {
+    width: 100%;
+    background: rgba(201,168,76,0.06);
+    border: 1px solid rgba(201,168,76,0.18);
+    border-radius: 16px;
+    padding: 16px 20px;
+    text-align: center;
+    animation: fadeSlideUp 0.4s ease forwards;
+    animation-delay: 0.35s;
+    animation-fill-mode: both;
+    opacity: 0;
+  }
+  .info-box-text {
+    font-family: 'Amiri', serif;
+    font-size: clamp(0.5rem, 5vw, 1.5rem);
+    color: var(--gold);
+    line-height: 1.9;
+    opacity: 0.85;
+  }
+  .info-box-text-source {
+    font-family: 'Amiri', serif;
+    font-size: clamp(0.5rem, 5vw, 1rem);
+    color: var(--gold);
+    line-height: 1.9;
+    opacity: 0.85;
+  }
+  body.theme-morning .info-box {
+    background: rgba(201,168,76,0.07);
+    border-color: rgba(150,110,30,0.2);
+  }
+  body.theme-morning .info-box-text { color: var(--gold-dark); }
+  .share-btn {
+  background: linear-gradient(135deg, var(--green), var(--green-light));
+  border: none; border-radius: 12px;
+  color: white; font-family: 'Noto Naskh Arabic', serif;
+  font-size: 0.9rem; padding: 9px 18px;
+  cursor: pointer; white-space: nowrap;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 15px rgba(46,107,62,0.4);
+}
+.share-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(46,107,62,0.5); }
+body.theme-morning .share-btn {
+  background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+  box-shadow: 0 4px 15px rgba(150,110,30,0.35);
+}
+body.theme-morning .share-btn:hover { box-shadow: 0 6px 20px rgba(150,110,30,0.5); }
+</style>
+</head>
+<body>
+
+<div id="stars"></div>
+
+<!-- ===== INSTALL BANNER ===== -->
+<div id="installBanner">
+  <div class="install-text">
+    <div class="install-title">أضف التطبيق لجهازك</div>
+    <div class="install-sub">اختصار على الشاشة الرئيسية</div>
+  </div>
+  <button class="install-btn" id="installBtn">تثبيت</button>
+  <button class="install-dismiss" id="dismissBtn">✕</button>
+</div>
+
+<!-- ===== SELECTION SCREEN ===== -->
+<div class="screen active" id="selectionScreen">
+  <div class="selection-inner">
+    <div class="selection-header fade-up">
+      <span class="selection-bismillah">بسم الله الرحمن الرحيم</span>
+      <div class="selection-title">قال رسول الله صلى الله عليه وسلم:<br> أَحَبُّ الأعمالِ إلى اللهِ أدْومُها و إن قَلَّ. </div>
+    <div class = "info-box-text-source">رواه البخاري ومسلم</div>
+    </div>
+
+    <div class="ornament fade-up">
+      <div class="ornament-line"></div>
+      <div class="ornament-star">✦</div>
+      <div class="ornament-line r"></div>
+    </div>
+
+
+
+    <div class="theme-toggle-wrap fade-up">
+      <div class="theme-toggle-label">اختر مظهر الصفحة</div>
+      <div class="theme-pills">
+        <button class="theme-pill active" id="pillMorning" onclick="setTheme('morning')">🌤 فاتح</button>
+        <button class="theme-pill" id="pillEvening" onclick="setTheme('evening')">🌙 داكن</button>
+      </div>
+    </div>
+
+    <div class="categories-grid">
+      <button class="category-btn morning" onclick="startDhikr('morning')">
+        <div class="cat-icon-wrap">🌅</div>
+        <div class="cat-text">
+          <div class="cat-name">أذكار الصباح والمساء</div>
+        </div>
+        <div class="cat-arrow">◄</div>
+      </button>
+
+      <button class="category-btn evening" onclick="startDhikr('evening')">
+        <div class="cat-icon-wrap">🕌</div>
+        <div class="cat-text">
+          <div class="cat-name">أذكار بعد الصلاة</div>
+        </div>
+        <div class="cat-arrow">◄</div>
+      </button>
+
+      <button class="category-btn sleep" onclick="startDhikr('sleep')">
+        <div class="cat-icon-wrap">🌙</div>
+        <div class="cat-text">
+          <div class="cat-name">أذكار قبل النوم</div>
+        </div>
+        <div class="cat-arrow">◄</div>
+      </button>
+
+      <button class="category-btn general" onclick="startDhikr('general')">
+        <div class="cat-icon-wrap">🤲</div>
+        <div class="cat-text">
+          <div class="cat-name">أدعية من القرآن والسنة</div>
+        </div>
+        <div class="cat-arrow">◄</div>
+      </button>
+    </div>
+    <button class="share-btn" onclick="shareApp()">مشاركة التطبيق 🔗</button>
+
+    <div class="info-box">
+      <div class="info-box-text">
+    - اللهم إنك عفو تحب العفو فاعف عني -
+      </div>
+      <div class="info-box-text-source">
+    <br>
+     عن عائشة أم المؤمنين رضي الله عنها قالت: يا رسول الله أرأيت إن علمت أي ليلة ليلة القدر ما أقول فيها؟<br></b> قال:" قولي: اللهم إنك عفو تحب العفو فاعف عني ".
+     <br>
+     رواه الترمذي وهو حسن صحيح
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== DHIKR SCREEN ===== -->
+<div class="screen" id="dhikrScreen">
+  <div class="app">
+    <div class="header">
+      <div class="header-top">
+        <button class="back-btn" onclick="goBack()">رجوع</button>
+        <div class="header-title" id="headerTitle">أذكار الصباح</div>
+        <button class="toggle-btn" id="toggleBtn" onclick="toggleMorningEvening()"></button>
+      </div>
+      <div class="progress-bar-container">
+        <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
+      </div>
+      <div class="dot-indicators" id="dotIndicators"></div>
+    </div>
+
+    <div class="card-area">
+      <div class="dhikr-card" id="dhikrCard">
+        <div class="card-number" id="cardNumber"></div>
+        <div class="dhikr-text" id="dhikrText"></div>
+      </div>
+    </div>
+
+    <div style="display:flex; justify-content:center; padding: 4px 20px 0;">
+      <div class="source-box" id="sourceBox" onclick="toggleSource()">
+        <div class="source-pill">
+          <span id="repeatInfo"></span>
+          <span class="arrow">▼</span>
+        </div>
+        <div class="source-text" id="sourceText"></div>
+      </div>
+    </div>
+
+    <div class="count-nav-section">
+      <button class="nav-arrow-btn" id="prevBtn" onclick="navigateDhikr(-1)" title="السابق">&#10094;</button>
+      <div class="count-display">
+        <div class="count-current" id="countCurrent">0</div>
+        <div class="count-separator">/</div>
+        <div class="count-total" id="countTotal">0</div>
+      </div>
+      <button class="nav-arrow-btn" id="nextBtn" onclick="navigateDhikr(1)" title="التالي">&#10095;</button>
+    </div>
+
+    <div class="tap-area">
+      <button class="tap-btn" id="tapBtn" onclick="handleTap()">
+        <div class="tap-btn-ring"></div>
+        <div class="tap-btn-ring-2"></div>
+        <div class="tap-btn-inner">
+          <span class="tap-label">اضغط</span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== COMPLETION SCREEN ===== -->
+<div class="screen" id="completionScreen">
+  <div class="completion-icon" id="completionIcon">🌅 🌃</div>
+  <div class="completion-title">جزاك الله خيرًا</div>
+  <div class="completion-subtitle" id="completionSubtitle"></div>
+  <div class="completion-buttons">
+    <button class="restart-btn" onclick="restartDhikr()">↺ &nbsp; إعادة الأذكار</button>
+    <button class="home-btn" onclick="goHome()">🏠 &nbsp; القائمة الرئيسية</button>
+  </div>
+</div>
+
+<script>
+const allAdhkar = {
+  morning: {
+    title: "أذكار الصباح والمساء",
+    completionMsg: "أحَبُّ الأعْمالِ إلى اللَّهِ أدْوَمُها وإنْ قَلَّ",
+    completionIcon: "🌅 🌃",
+    list: [
+      { text: "اللَّهُمَّ أنْتَ رَبِّي لا إلَهَ إلَّا أنْتَ، خَلَقْتَنِي وأنا عَبْدُكَ، وأنا علَى عَهْدِكَ ووَعْدِكَ ما اسْتَطَعْتُ، أعُوذُ بكَ مِن شَرِّ ما صَنَعْتُ، أبُوءُ لكَ بنِعْمَتِكَ عَلَيَّ، وأَبُوءُ لكَ بذَنْبِي فاغْفِرْ لِي؛ فإنَّه لا يَغْفِرُ الذُّنُوبَ إلَّا أنْتَ", repeat: 1, source: "روى البخاري (6306) عن شَدَّاد بْن أَوْسٍ رَضِيَ اللَّهُ عَنْهُ: عَنِ النَّبِيِّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ: سَيِّدُ الِاسْتِغْفَارِ أَنْ تَقُولَ: اللَّهُمَّ أَنْتَ رَبِّي لاَ إِلَهَ إِلَّا أَنْت َ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوءُ لَكَ بِذَنْبِي فَاغْفِرْ لِي، فَإِنَّهُ لاَ يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ.  \nقَالَ: وَمَنْ قَالَهَا مِنَ النَّهَارِ مُوقِنًا بِهَا، فَمَاتَ مِنْ يَوْمِهِ قَبْلَ أَنْ يُمْسِيَ، فَهُوَ مِنْ أَهْلِ الجَنَّةِ، وَمَنْ قَالَهَا مِنَ اللَّيْلِ وَهُوَ مُوقِنٌ بِهَا، فَمَاتَ قَبْلَ أَنْ يُصْبِحَ، فَهُوَ مِنْ أَهْلِ الجَنَّةِ." },
+      { text: "سُبْحَانَ اللهِ وَبِحَمْدِهِ، عَدَدَ خَلْقِهِ، وَرِضَا نَفْسِهِ، وَزِنَةَ عَرْشِهِ، وَمِدَادَ كَلِمَاتِهِ", repeat: 3, source: "روى مسلم (2726) عَنْ جُوَيْرِيَةَ، أَنَّ النَّبِيَّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ خَرَجَ مِنْ عِنْدِهَا بُكْرَةً حِينَ صَلَّى الصُّبْحَ، وَهِيَ فِي مَسْجِدِهَا، ثُمَّ رَجَعَ بَعْدَ أَنْ أَضْحَى، وَهِيَ جَالِسَةٌ، فَقَالَ: مَا زِلْتِ عَلَى الْحَالِ الَّتِي فَارَقْتُكِ عَلَيْهَا؟ قَالَتْ: نَعَمْ، قَالَ النَّبِيُّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ: لَقَدْ قُلْتُ بَعْدَكِ أَرْبَعَ كَلِمَاتٍ، ثَلَاثَ مَرَّات ٍ، لَوْ وُزِنَتْ بِمَا قُلْتِ مُنْذُ الْيَوْمِ لَوَزَنَتْهُنَّ: سُبْحَانَ اللهِ وَبِحَمْدِهِ، عَدَدَ خَلْقِهِ وَرِضَا نَفْسِهِ وَزِنَةَ عَرْشِهِ وَمِدَادَ كَلِمَاتِهِ." },
+      { text: "اللَّهُمَّ فَاطِرَ السَّمَوَاتِ وَالْأَرْضِ، عَالِمَ الْغَيْبِ وَالشَّهَادَةِ، لَا إِلَهَ إِلَّا أَنْتَ رَبَّ كُلِّ شَيْءٍ وَمَلِيكَهُ، أَعُوذُ بِكَ مِنْ شَرِّ نَفْسِي، وَمِنْ شَرِّ الشَّيْطَانِ وَشِرْكِهِ، وَأَنْ أَقْتَرِفَ عَلَى نَفْسِي سُوءًا أَوْ أَجُرَّهُ إِلَى مُسْلِمٍ", repeat: 1, source: "روى الإمام أحمد في مسنده (6812) والترمذي في سننه (3529) وحسنه، عَنْ أَبِي رَاشِدٍ الْحُبْرَانِيِّ قَالَ: أَتَيْتُ عَبْدَ اللَّهِ بْنَ عَمْرِو بْنِ الْعَاصِ، فَقُلْتُ لَهُ: حَدِّثْنَا مَا سَمِعْتَ مِنْ رَسُولِ اللَّهِ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ. فَأَلْقَى بَيْنَ يَدَيَّ صَحِيفَةً، فَقَالَ: هَذَا مَا كَتَبَ لِي رَسُولُ اللَّهِ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ. فَنَظَرْتُ فِيهَا فَإِذَا فِيهَا: أَنَّ أَبَا بَكْرٍ الصِّدِّيقَ قَالَ يَا رَسُولَ اللَّهِ عَلِّمْنِي مَا أَقُولُ إِذَا أَصْبَحْتُ وَإِذَا أَمْسَيْتُ؟ فَقَالَ لَهُ رَسُولُ اللَّهِ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ: يَا أَبَا بَكْرٍ، قُلْ اللَّهُمَّ فَاطِرَ السَّمَوَاتِ وَالْأَرْضِ، عَالِمَ الْغَيْبِ وَالشَّهَادَةِ، لَا إِلَهَ إِلَّا أَنْتَ رَبَّ كُلِّ شَيْءٍ وَمَلِيكَهُ، أَعُوذُ بِكَ مِنْ شَرِّ نَفْسِي، وَمِنْ شَرِّ الشَّيْطَانِ وَشِرْكِهِ، وَأَنْ أَقْتَرِفَ عَلَى نَفْسِي سُوءًا أَوْ أَجُرَّهُ إِلَى مُسْلِمٍ." },
+      { text: "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ، اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي دِينِي وَدُنْيَايَ وَأَهْلِي وَمَالِي، اللَّهُمَّ اسْتُرْ عَوْرَاتِي وَآمِنْ رَوْعَاتِي، اللَّهُمَّ احْفَظْنِي مِنْ بَيْنِ يَدَيَّ، وَمِنْ خَلْفِي، وَعَنْ يَمِينِي، وَعَنْ شِمَالِي، وَمِنْ فَوْقِي، وَأَعُوذُ بِعَظَمَتِكَ أَنْ أُغْتَالَ مِنْ تَحْتِي", repeat: 1, source: "روى أبو داود (5074) عن ابْن عُمَرَ، قال: لَمْ يَكُنْ رَسُولُ اللَّهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ يَدَعُ هَؤُلَاءِ الدَّعَوَاتِ، حِينَ يُمْسِي، وَحِينَ يُصْبِحُ: اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ، اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي دِينِي وَدُنْيَايَ وَأَهْلِي وَمَالِي، اللَّهُمَّ اسْتُرْ عَوْرَاتِي وَآمِنْ رَوْعَاتِي، اللَّهُمَّ احْفَظْنِي مِنْ بَيْنِ يَدَيَّ، وَمِنْ خَلْفِي، وَعَنْ يَمِينِي، وَعَنْ شِمَالِي، وَمِنْ فَوْقِي، وَأَعُوذُ بِعَظَمَتِكَ أَنْ أُغْتَالَ مِنْ تَحْتِي."},
+      { text: "صباحًا: اللهُمَّ بِكَ أَصْبَحْنَا، وَبِكَ أَمْسَيْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ، وَإِلَيْكَ النُّشُورُ \n مساءًا: اللَّهُمَّ بِكَ أَمْسَيْنَا، وَبِكَ أَصْبَحْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ، وَإِلَيْكَ الْمَصِيرُ", repeat: 1, source: "روى أبو داود (5068) والترمذي (3391) والنسائي في (الكبرى) (10323) عَنْ أَبِي هُرَيْرَةَ عَنِ النَّبِيِّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ أَنَّهُ كَانَ يَقُولُ إِذَا أَصْبَحَ: اللهُمَّ بِكَ أَصْبَحْنَا، وَبِكَ أَمْسَيْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ، وَإِلَيْكَ النُّشُورُ) وَإِذَا أَمْسَى قَالَ: (اللَّهُمَّ بِكَ أَمْسَيْنَا، وَبِكَ أَصْبَحْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ، وَإِلَيْكَ الْمَصِيرُ)." },
+      { text: "يَا حَيُّ يَا قَيُّومُ بِرَحْمَتِكَ أَسْتَغِيثُ، أَصْلِحْ لِي شَأْنِي كُلَّهُ، وَلَا تَكِلْنِي إِلَى نَفْسِي طَرْفَةَ عَيْنٍ", repeat: 1, source: "روى النسائي في (الكبرى) (227) عن أَنَس بْن مَالِكٍ، قال: قَالَ النَّبِيُّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ لِفَاطِمَةَ: مَا يَمْنَعُكِ أَنْ تَسْمَعِي مَا أُوصِيكِ بِهِ، أَنْ تَقُولِي إِذَا أَصْبَحْتِ وَإِذَا أَمْسَيْتِ: يَا حَيُّ يَا قَيُّومُ بِرَحْمَتِكَ أَسْتَغِيثُ، أَصْلِحْ لِي شَأْنِي كُلَّهُ، وَلَا تَكِلْنِي إِلَى نَفْسِي طَرْفَةَ عَيْنٍ." },
+      { text: "رَضِيتُ بِاللهِ رَبًّا، وَبِالْإِسْلَامِ دِينًا، وَبِمُحَمَّدٍ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ نَبِيًّا", repeat: 3, source: "روى أحمد (18967) عن خَادِم النَّبِيِّ، صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ، قَالَ: قَالَ رَسُولُ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ: مَا مِنْ عَبْدٍ مُسْلِمٍ يَقُولُ حِينَ يُصْبِحُ وَحِينَ يُمْسِي ثَلَاثَ مَرَّاتٍ: رَضِيتُ بِاللهِ رَبًّا، وَبِالْإِسْلَامِ دِينًا، وَبِمُحَمَّدٍ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ نَبِيًّا، إِلَّا كَانَ حَقًّا عَلَى اللهِ أَنْ يُرْضِيَهُ يَوْمَ الْقِيَامَةِ." },
+      { text: "(سورة الإخلاص) قُلْ هُوَ ٱللَّهُ أَحَدٌ (1) ٱللَّهُ ٱلصَّمَدُ (2) لَمْ يَلِدْ وَلَمْ يُولَدْ (3) وَلَمْ يَكُن لَّهُۥ كُفُوًا أَحَدٌۢ (4)\n (سورة الفلق) قُلْ أَعُوذُ بِرَبِّ ٱلْفَلَقِ (1) مِن شَرِّ مَا خَلَقَ (2) وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ (3) وَمِن شَرِّ ٱلنَّفَّـٰثَـٰتِ فِى ٱلْعُقَدِ (4) وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ (5) \n (سورة الناس) قُلْ أَعُوذُ بِرَبِّ ٱلنَّاسِ (1) مَلِكِ ٱلنَّاسِ (2) إِلَـٰهِ ٱلنَّاسِ (3) مِن شَرِّ ٱلْوَسْوَاسِ ٱلْخَنَّاسِ (4) ٱلَّذِى يُوَسْوِسُ فِى صُدُورِ ٱلنَّاسِ (5) مِنَ ٱلْجِنَّةِ وَٱلنَّاسِ (6)", repeat: 3, source: "عن عبد الله بن خبيب رضي الله عنه أن النبي صلى الله عليه وسلم قال له: قُلْ: ( قُلْ هُوَ اللَّهُ أَحَدٌ )، وَالمُعَوِّذَتَيْنِ، حِينَ تُمْسِي وَتُصْبِحُ ثَلاَثَ مَرَّاتٍ، تَكْفِيكَ مِنْ كُلِّ شَيْءٍ. رواه الترمذي (3575) وصححه، وأبو داود (5082). " },
+      { text: "بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ", repeat: 3, source: "عن عثمان بن عفان رضي الله عنه قال: سَمِعْتُ رَسُولَ اللَّهِ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ يَقُولُ: مَنْ قَالَ: بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ ثَلَاثَ مَرَّاتٍ لَمْ تُصِبْهُ فَجْأَةُ بَلَاءٍ حَتَّى يُصْبِحَ، وَمَنْ قَالَهَا حِينَ يُصْبِحُ ثَلَاثُ مَرَّاتٍ، لَمْ تُصِبْهُ فَجْأَةُ بَلَاءٍ حَتَّى يُمْسِيَ. رواه أبو داود (5088)." },
+      { text: "أَعُوذُ بِكَلِمَاتِ اللهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ", repeat: 1, source: "روى مسلم (2709) عَنْ أَبِي هُرَيْرَةَ، أَنَّهُ قَالَ: جَاءَ رَجُلٌ إِلَى النَّبِيِّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ فَقَالَ: يَا رَسُولَ اللهِ مَا لَقِيتُ مِنْ عَقْرَبٍ لَدَغَتْنِي الْبَارِحَةَ، قَالَ: أَمَا لَوْ قُلْتَ، حِينَ أَمْسَيْتَ: أَعُوذُ بِكَلِمَاتِ اللهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ، لَمْ تَضُرَّكَ." },
+      { text: "أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ لَا إِلَهَ إِلَّا اللهُ، وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، رَبِّ أَسْأَلُكَ خَيْرَ مَا فِي هَذِهِ اللَّيْلَةِ وَخَيْرَ مَا بَعْدَهَا، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا فِي هَذِهِ اللَّيْلَةِ وَشَرِّ مَا بَعْدَهَا، رَبِّ أَعُوذُ بِكَ مِنَ الْكَسَلِ وَسُوءِ الْكِبَرِ، رَبِّ أَعُوذُ بِكَ مِنْ عَذَابٍ فِي النَّارِ وَعَذَابٍ فِي الْقَبْرِ \n وإذا أصبح: (أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ)", repeat: 1, source: "روى مسلم (2723) عن ابن مسعود قَالَ: كَانَ نَبِيُّ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ، إِذَا أَمْسَى قَالَ: أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ لَا إِلَهَ إِلَّا اللهُ، وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، رَبِّ أَسْأَلُكَ خَيْرَ مَا فِي هَذِهِ اللَّيْلَةِ وَخَيْرَ مَا بَعْدَهَا، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا فِي هَذِهِ اللَّيْلَةِ وَشَرِّ مَا بَعْدَهَا، رَبِّ أَعُوذُ بِكَ مِنَ الْكَسَلِ وَسُوءِ الْكِبَرِ، رَبِّ أَعُوذُ بِكَ مِنْ عَذَابٍ فِي النَّارِ وَعَذَابٍ فِي الْقَبْرِ. وَإِذَا أَصْبَحَ قَالَ ذَلِكَ أَيْضًا: أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ."},
+      { text: "ءَامَنَ ٱلرَّسُولُ بِمَآ أُنزِلَ إِلَيْهِ مِن رَّبِّهِۦ وَٱلْمُؤْمِنُونَ ۚ كُلٌّ ءَامَنَ بِٱللَّهِ وَمَلَـٰٓئِكَتِهِۦ وَكُتُبِهِۦ وَرُسُلِهِۦ لَا نُفَرِّقُ بَيْنَ أَحَدٍۢ مِّن رُّسُلِهِۦ ۚ وَقَالُوا۟ سَمِعْنَا وَأَطَعْنَا ۖ غُفْرَانَكَ رَبَّنَا وَإِلَيْكَ ٱلْمَصِيرُ (285) لَا يُكَلِّفُ ٱللَّهُ نَفْسًا إِلَّا وُسْعَهَا ۚ لَهَا مَا كَسَبَتْ وَعَلَيْهَا مَا ٱكْتَسَبَتْ ۗ رَبَّنَا لَا تُؤَاخِذْنَآ إِن نَّسِينَآ أَوْ أَخْطَأْنَا ۚ رَبَّنَا وَلَا تَحْمِلْ عَلَيْنَآ إِصْرًۭا كَمَا حَمَلْتَهُۥ عَلَى ٱلَّذِينَ مِن قَبْلِنَا ۚ رَبَّنَا وَلَا تُحَمِّلْنَا مَا لَا طَاقَةَ لَنَا بِهِۦ ۖ وَٱعْفُ عَنَّا وَٱغْفِرْ لَنَا وَٱرْحَمْنَآ ۚ أَنتَ مَوْلَىٰنَا فَٱنصُرْنَا عَلَى ٱلْقَوْمِ ٱلْكَـٰفِرِينَ (286) سورة البقرة", repeat: 1, source: "روى البخاري (4008) ، ومسلم (807) عن أبي مسعود البدري رضي الله عنه، قال: قال رسول الله صلى الله عليه وسلم: (الآيَتانِ مِن آخِرِ سُورَةِ البَقَرَةِ، مَن قَرَأَهُما في لَيْلَةٍ كَفَتاهُ)." },
+      { text: "لا إلَهَ إلَّا اللَّهُ وحْدَهُ لا شَرِيكَ له، له المُلْكُ وله الحَمْدُ، وهو علَى كُلِّ شيءٍ قَدِيرٌ", repeat: 100, source: "روى البخاري (6040) عَنْ أَبِي هُرَيْرَةَ رَضِيَ اللَّهُ عَنْهُ أَنَّ رَسُولَ اللَّهِ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ قَالَ: مَنْ قَالَ لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، فِي يَوْمٍ مِائَةَ مَرَّةٍ؛ كَانَتْ لَهُ عَدْلَ عَشْرِ رِقَابٍ، وَكُتِبَ لَهُ مِائَةُ حَسَنَةٍ، وَمُحِيَتْ عَنْهُ مِائَةُ سَيِّئَةٍ، وَكَانَتْ لَهُ حِرْزًا مِنْ الشَّيْطَانِ يَوْمَهُ ذَلِكَ حَتَّى يُمْسِيَ، وَلَمْ يَأْتِ أَحَدٌ بِأَفْضَلَ مِمَّا جَاءَ، إِلَّا رَجُلٌ عَمِلَ أَكْثَرَ مِنْهُ." },
+      { text: "سُبْحَانَ اللهِ وَبِحَمْدِهِ", repeat: 100, source: "روى مسلم (2692) عَنْ أَبِي هُرَيْرَةَ، قَالَ: قَالَ رَسُولُ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ: مَنْ قَالَ: حِينَ يُصْبِحُ وَحِينَ يُمْسِي: سُبْحَانَ اللهِ وَبِحَمْدِهِ، مِائَةَ مَرَّةٍ، لَمْ يَأْتِ أَحَدٌ يَوْمَ الْقِيَامَةِ، بِأَفْضَلَ مِمَّا جَاءَ بِهِ، إِلَّا أَحَدٌ قَالَ مِثْلَ مَا قَالَ، أَوْ زَادَ عَلَيْهِ." },
+    ]
+  },
+  evening: {
+    title: "أذكار ما بعد الصلاة",
+    completionMsg: "أحَبُّ الأعْمالِ إلى اللَّهِ أدْوَمُها وإنْ قَلَّ",
+    completionIcon: "🕌",
+    list: [
+      { text: "أستَغفِرُ اللهَ", repeat: 3, label: "عن ثوبانَ رضيَ اللهُ عنه مولَى رسولِ اللهِ صلَّى اللهُ عليه وسلَّم قال: (كان رسولُ اللهِ صلَّى اللهُ عليه وسلَّم إذا انصرَفَ مِن صلاتِه، استغفَرَ ثلاثًا، وقال: اللهمَّ أنتَ السَّلامُ، ومنك السَّلامُ، تبارَكْتَ يا ذا الجلالِ والإكرامِ ) رواه مسلم (591)." },
+      { text: "اللهمَّ أنتَ السَّلامُ، ومنك السَّلامُ، تبارَكْتَ يا ذا الجلالِ والإكرامِ", repeat: 1, label: "عن ثوبانَ رضيَ اللهُ عنه مولَى رسولِ اللهِ صلَّى اللهُ عليه وسلَّم قال: (كان رسولُ اللهِ صلَّى اللهُ عليه وسلَّم إذا انصرَفَ مِن صلاتِه، استغفَرَ ثلاثًا، وقال: اللهمَّ أنتَ السَّلامُ، ومنك السَّلامُ، تبارَكْتَ يا ذا الجلالِ والإكرامِ ) رواه مسلم (591)." },
+      { text: "لا إلهَ إلَّا اللهُ وحده لا شريكَ له، له المُلكُ وله الحمدُ، وهو على كلِّ شيءٍ قديرٌ، اللهمَّ لا مانعَ لِما أعطَيْتَ، ولا مُعطِيَ لِما منَعْتَ، ولا ينفَعُ ذا الجَدِّ منك الجَدُّ", repeat: 1, label: "عن المُغيرةِ بنِ شُعبةَ رضيَ اللهُ عنه، قال: (إنَّ النبيَّ صلَّى اللهُ عليه وسلَّم كان يقولُ في دُبُرِ كلِّ صلاةٍ مكتوبةٍ: لا إلهَ إلَّا اللهُ وحدَه لا شريكَ له، له المُلكُ، وله الحمدُ، وهو على كلِّ شيءٍ قديرٌ، اللهمَّ لا مانعَ لِما أعطَيْتَ، ولا مُعْطيَ لِما منَعْتَ، ولا ينفَعُ ذا الجَدِّ منك الجَدُّ ) رواه البخاري (844)، ومسلم (593)." },
+      { text: "لا إلهَ إلَّا اللهُ وحدَه لا شريكَ له، له المُلكُ وله الحمدُ، وهو على كلِّ شيءٍ قديرٌ، لا حولَ ولا قوَّةَ إلَّا باللهِ، لا إلهَ إلَّا اللهُ، ولا نعبُدُ إلَّا إيَّاهُ، له النِّعمةُ وله الفضلُ، وله الثَّناءُ الحَسَنُ، لا إلهَ إلَّا اللهُ مُخلِصينَ له الدِّينَ ولو كرِهَ الكافرونَ", repeat: 1, label: "عن عبدِ اللهِ بنِ الزُّبَيرِ رضيَ اللهُ عنه: (أنَّه كان يقولُ في دُبُرِ كلِّ صلاةٍ حين يُسلِّمُ: لا إلهَ إلَّا اللهُ وحدَه لا شريكَ له، له المُلكُ وله الحمدُ وهو على كلِّ شيءٍ قديرٌ، لا حولَ ولا قوَّةَ إلَّا باللهِ، لا إلهَ إلَّا اللهُ، ولا نعبُدُ إلَّا إياهُ، له النِّعمةُ وله الفضلُ، وله الثَّناءُ الحسَنُ، لا إلهَ إلَّا اللهُ مُخلِصينَ له الدِّينَ ولو كرِهَ الكافرونَ، وقال: كان رسولُ اللهِ صلَّى اللهُ عليه وسلَّم يُهلِّلُ بهنَّ دُبُرَ كلِّ صلاةٍ) رواه مسلم (594)." },
+      { text: "ربِّ قِنِي عذابَك يومَ تبعَثُ عِبادَكَ", repeat: 1, label: "عن البَرَاءِ بنِ عازبٍ رضيَ اللهُ عنه، قال: (كنَّا إذا صلَّيْنا خَلْفَ رسولِ اللهِ صلَّى اللهُ عليه وسلَّم، أحبَبْنا أنْ نكونَ عن يمينِه، يُقبِلُ علينا بوجهِه، قال: فسمِعْتُه يقولُ: ربِّ قِنِي عذاَبك يومَ تبعَثُ أو تجمَعُ عِبادَكَ ) رواه مسلم (709)." },
+      { text: "سبحانَ الله \nالحمدُلله \nاللهُ أكبر", repeat: 33, label: "عن أبي هريرةَ رضي الله عنه، عن رسولِ اللهِ صلَّى اللهُ عليه وسلَّم قال: (من سَبَّحَ اللهَ في دبُرِ كُلِّ صلاةٍ ثلاثًا وثلاثينَ، وحَمِدَ الله ثلاثًا وثلاثينَ، وكبَّرَ اللهَ ثلاثًا وثلاثينَ، فتلك تسِعةٌ وتسعونَ، وقال تمامَ المائةِ: لا إلهَ إلَّا الله وحدَه لا شريكَ له، له الملكُ وله الحمدُ، وهو على كلِّ شَيءٍ قَديرٌ، غُفِرَت خطاياه وإن كانت مِثلَ زَبَدِ البَحرِ) رواه مسلم (597)." },
+      { text: "لا إلهَ إلَّا الله وحدَه لا شريكَ له، له الملكُ وله الحمدُ، وهو على كلِّ شَيءٍ قَديرٌ", repeat: 1, label: "عن أبي هريرةَ رضي الله عنه، عن رسولِ اللهِ صلَّى اللهُ عليه وسلَّم قال: (من سَبَّحَ اللهَ في دبُرِ كُلِّ صلاةٍ ثلاثًا وثلاثينَ، وحَمِدَ الله ثلاثًا وثلاثينَ، وكبَّرَ اللهَ ثلاثًا وثلاثينَ، فتلك تسِعةٌ وتسعونَ، وقال تمامَ المائةِ: لا إلهَ إلَّا الله وحدَه لا شريكَ له، له الملكُ وله الحمدُ، وهو على كلِّ شَيءٍ قَديرٌ، غُفِرَت خطاياه وإن كانت مِثلَ زَبَدِ البَحرِ) رواه مسلم (597)." },
+      { text: "(آية الكرسي) ٱللَّهُ لَآ إِلَـٰهَ إِلَّا هُوَ ٱلْحَىُّ ٱلْقَيُّومُ ۚ لَا تَأْخُذُهُۥ سِنَةٌۭ وَلَا نَوْمٌۭ ۚ لَّهُۥ مَا فِى ٱلسَّمَـٰوَٰتِ وَمَا فِى ٱلْأَرْضِ ۗ مَن ذَا ٱلَّذِى يَشْفَعُ عِندَهُۥٓ إِلَّا بِإِذْنِهِۦ ۚ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ وَلَا يُحِيطُونَ بِشَىْءٍۢ مِّنْ عِلْمِهِۦٓ إِلَّا بِمَا شَآءَ ۚ وَسِعَ كُرْسِيُّهُ ٱلسَّمَـٰوَٰتِ وَٱلْأَرْضَ ۖ وَلَا يَـُٔودُهُۥ حِفْظُهُمَا ۚ وَهُوَ ٱلْعَلِىُّ ٱلْعَظِيمُ", repeat: 1, label: "عن أبي أُمامةَ الباهليِّ رضيَ اللهُ عنه، قال: قال رسولُ اللهِ صلَّى اللهُ عليه وسلَّم: (مَن قرأَ آيةَ الكُرسيِّ دُبُرَ كلِّ صلاةٍ مكتوبةٍ، لم يمنَعْه مِن دخولِ الجنَّةِ إلَّا الموتُ ) أخرجه النسائي في ((السنن الكبرى)) (9848)، والروياني في ((المسند)) (1268)، والطبراني (8/134) (7532) واللفظ له." },
+      { text: "(سورة الإخلاص) قُلْ هُوَ ٱللَّهُ أَحَدٌ (1) ٱللَّهُ ٱلصَّمَدُ (2) لَمْ يَلِدْ وَلَمْ يُولَدْ (3) وَلَمْ يَكُن لَّهُۥ كُفُوًا أَحَدٌۢ (4)\n (سورة الفلق) قُلْ أَعُوذُ بِرَبِّ ٱلْفَلَقِ (1) مِن شَرِّ مَا خَلَقَ (2) وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ (3) وَمِن شَرِّ ٱلنَّفَّـٰثَـٰتِ فِى ٱلْعُقَدِ (4) وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ (5) \n (سورة الناس) قُلْ أَعُوذُ بِرَبِّ ٱلنَّاسِ (1) مَلِكِ ٱلنَّاسِ (2) إِلَـٰهِ ٱلنَّاسِ (3) مِن شَرِّ ٱلْوَسْوَاسِ ٱلْخَنَّاسِ (4) ٱلَّذِى يُوَسْوِسُ فِى صُدُورِ ٱلنَّاسِ (5) مِنَ ٱلْجِنَّةِ وَٱلنَّاسِ (6)", repeat: 1, label: "عن عُقبةَ بنِ عامرٍ رضيَ اللهُ عنه، قال: (أمَرني رسولُ اللهِ صلَّى اللهُ عليه وسلَّم أنْ أقرَأَ المُعوِّذاتِ دُبُرَ كلِّ صلاةٍ ) أخرجه أحمد في (المسند) (4/155) وأبو داود في (السنن) (1523) ، والنسائي في (السنن) (رقم/1336) ، وصححه الحاكم وقال : على شرط مسلم ." },
+    ]
+  },
+  sleep: {
+    title: "أذكار ما قبل النوم",
+    completionMsg: "أحَبُّ الأعْمالِ إلى اللَّهِ أدْوَمُها وإنْ قَلَّ",
+    completionIcon: "🌙",
+    list: [
+      { text: "(آية الكرسي) ٱللَّهُ لَآ إِلَـٰهَ إِلَّا هُوَ ٱلْحَىُّ ٱلْقَيُّومُ ۚ لَا تَأْخُذُهُۥ سِنَةٌۭ وَلَا نَوْمٌۭ ۚ لَّهُۥ مَا فِى ٱلسَّمَـٰوَٰتِ وَمَا فِى ٱلْأَرْضِ ۗ مَن ذَا ٱلَّذِى يَشْفَعُ عِندَهُۥٓ إِلَّا بِإِذْنِهِۦ ۚ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ وَلَا يُحِيطُونَ بِشَىْءٍۢ مِّنْ عِلْمِهِۦٓ إِلَّا بِمَا شَآءَ ۚ وَسِعَ كُرْسِيُّهُ ٱلسَّمَـٰوَٰتِ وَٱلْأَرْضَ ۖ وَلَا يَـُٔودُهُۥ حِفْظُهُمَا ۚ وَهُوَ ٱلْعَلِىُّ ٱلْعَظِيمُ ", repeat: 1, label: "روى البخاري تعليقا (2311) من حديث أبي هريرة ، وفيه قول الشيطان له : ( إِذَا أَوَيْتَ إِلَى فِرَاشِكَ، فَاقْرَأْ آيَةَ الكُرْسِيِّ ، فَإِنَّكَ لَنْ يَزَالَ عَلَيْكَ مِنَ اللَّهِ حَافِظٌ ، وَلاَ يَقْرَبَنَّكَ شَيْطَانٌ حَتَّى تُصْبِح) فقال النبي صلى الله عليه وسلم : (أَمَا إِنَّهُ قَدْ صَدَقَكَ وَهُوَ كَذُوبٌ)." },
+      { text: "(سورة الإخلاص) قُلْ هُوَ ٱللَّهُ أَحَدٌ (1) ٱللَّهُ ٱلصَّمَدُ (2) لَمْ يَلِدْ وَلَمْ يُولَدْ (3) وَلَمْ يَكُن لَّهُۥ كُفُوًا أَحَدٌۢ (4)\n (سورة الفلق) قُلْ أَعُوذُ بِرَبِّ ٱلْفَلَقِ (1) مِن شَرِّ مَا خَلَقَ (2) وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ (3) وَمِن شَرِّ ٱلنَّفَّـٰثَـٰتِ فِى ٱلْعُقَدِ (4) وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ (5) \n (سورة الناس) قُلْ أَعُوذُ بِرَبِّ ٱلنَّاسِ (1) مَلِكِ ٱلنَّاسِ (2) إِلَـٰهِ ٱلنَّاسِ (3) مِن شَرِّ ٱلْوَسْوَاسِ ٱلْخَنَّاسِ (4) ٱلَّذِى يُوَسْوِسُ فِى صُدُورِ ٱلنَّاسِ (5) مِنَ ٱلْجِنَّةِ وَٱلنَّاسِ (6) (تنفث في الكفين ويمسح بها ما يمكن من الجسد)", repeat: 3, label: "روى البخاري (5017) عَنْ عَائِشَةَ رضي الله عنها: (أَنَّ النَّبِيَّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ كَانَ إِذَا أَوَى إِلَى فِرَاشِهِ كُلَّ لَيْلَةٍ جَمَعَ كَفَّيْهِ، ثُمَّ نَفَثَ فِيهِمَا فَقَرَأَ فِيهِمَا: قُلْ هُوَ اللَّهُ أَحَدٌ وَقُلْ أَعُوذُ بِرَبِّ الفَلَقِ وَقُلْ أَعُوذُ بِرَبِّ النَّاسِ، ثُمَّ يَمْسَحُ بِهِمَا مَا اسْتَطَاعَ مِنْ جَسَدِهِ، يَبْدَأُ بِهِمَا عَلَى رَأْسِهِ وَوَجْهِهِ وَمَا أَقْبَلَ مِنْ جَسَدِهِ ، يَفْعَلُ ذَلِكَ ثَلاَثَ مَرَّاتٍ ) ." },
+      { text: "(سورة الكافرون) قُلْ يَـٰٓأَيُّهَا ٱلْكَـٰفِرُونَ (1) لَآ أَعْبُدُ مَا تَعْبُدُونَ (2) وَلَآ أَنتُمْ عَـٰبِدُونَ مَآ أَعْبُدُ (3) وَلَآ أَنَا۠ عَابِدٌۭ مَّا عَبَدتُّمْ (4) وَلَآ أَنتُمْ عَـٰبِدُونَ مَآ أَعْبُدُ (5) لَكُمْ دِينُكُمْ وَلِىَ دِينِ (6)", repeat: 1, label: "روى أبو داود (5055) عَنْ فَرْوَةَ بْنِ نَوْفَلٍ، عَنْ أَبِيهِ، أَنَّ النَّبِيَّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ، قَالَ لِنَوْفَلٍ: ( اقْرَأْ قُلْ يَا أَيُّهَا الْكَافِرُونَ ثُمَّ نَمْ، عَلَى خَاتِمَتِهَا، فَإِنَّهَا بَرَاءَةٌ مِنَ الشِّرْكِ)" },
+      { text: "(عند النوم) بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا \n(عند الاستيقاظ) الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ", repeat: 1, label: "عَنْ حُذَيْفَةَ بْنِ الْيَمَانِ رضي الله عنه قَالَ: كَانَ النَّبِيُّ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ إِذَا أَرَادَ أَنْ يَنَامَ قَالَ (بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا) وَإِذَا اسْتَيْقَظَ مِنْ مَنَامِهِ قَالَ (الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ) رواه البخاري (6324)." },
+      { text: "بِاسْمِكَ رَبِّ وَضَعْتُ جَنْبِي، وَبِكَ أَرْفَعُهُ، إِنْ أَمْسَكْتَ نَفْسِي فَارْحَمْهَا، وَإِنْ أَرْسَلْتَهَا فَاحْفَظْهَا بِمَا تَحْفَظُ بِهِ عِبَادَكَ الصَّالِحِينَ", repeat: 1, label: "عَنْ أَبِي هُرَيْرَةَ رضي الله عنه قَالَ: قَالَ النَّبِيُّ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ: إِذَا أَوَى أَحَدُكُمْ إِلَى فِرَاشِهِ فَلْيَنْفُضْ فِرَاشَهُ بِدَاخِلَةِ إِزَارِهِ فَإِنَّهُ لَا يَدْرِي مَا خَلَفَهُ عَلَيْهِ ثُمَّ يَقُولُ: بِاسْمِكَ رَبِّ وَضَعْتُ جَنْبِي، وَبِكَ أَرْفَعُهُ، إِنْ أَمْسَكْتَ نَفْسِي فَارْحَمْهَا، وَإِنْ أَرْسَلْتَهَا فَاحْفَظْهَا بِمَا تَحْفَظُ بِهِ عِبَادَكَ الصَّالِحِينَ  رواه البخاري (6320)، ومسلم (2714)." },
+      { text: "سبحان الله (33)\nالحمدلله (33)\nالله أكبر (34)", repeat: 33, label: "عَنْ عَلِيِّ بْنِ أَبِي طَالِبٍ رضي الله عنه أَنَّ فَاطِمَةَ رضي الله عنها أَتَتْ النَّبِيَّ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ تَسْأَلُهُ خَادِمًا، فَقَالَ: أَلَا أُخْبِرُكِ مَا هُوَ خَيْرٌ لَكِ مِنْهُ، تُسَبِّحِينَ اللَّهَ عِنْدَ مَنَامِكِ ثَلَاثًا وَثَلَاثِينَ، وَتَحْمَدِينَ اللَّهَ ثَلَاثًا وَثَلَاثِينَ، وَتُكَبِّرِينَ اللَّهَ أَرْبَعًا وَثَلَاثِينَ. فَمَا تَرَكْتُهَا بَعْدُ. قِيلَ: وَلَا لَيْلَةَ صِفِّينَ؟ قَالَ: وَلَا لَيْلَةَ صِفِّينَ.  رواه البخاري (5362)، ومسلم (2727)." },
+      { text: "الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنَا وَسَقَانَا وَكَفَانَا وَآوَانَا فَكَمْ مِمَّنْ لَا كَافِيَ لَهُ وَلَا مُؤْوِيَ", repeat: 1, label: "عَنْ أَنَسٍ رضي الله عنه أَنَّ رَسُولَ اللَّهِ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ كَانَ إِذَا أَوَى إِلَى فِرَاشِهِ قَالَ: )الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنَا وَسَقَانَا وَكَفَانَا وَآوَانَا فَكَمْ مِمَّنْ لَا كَافِيَ لَهُ وَلَا مُؤْوِيَ( رواه مسلم (2715)." },
+      { text: "اللَّهُمَّ خَلَقْتَ نَفْسِي وَأَنْتَ تَوَفَّاهَا، لَكَ مَمَاتُهَا وَمَحْيَاهَا، إِنْ أَحْيَيْتَهَا فَاحْفَظْهَا، وَإِنْ أَمَتَّهَا فَاغْفِرْ لَهَا، اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَافِيَةَ", repeat: 1, label: "عَنْ عَبْدِ اللَّهِ بْنِ عُمَرَ أَنَّهُ أَمَرَ رَجُلًا إِذَا أَخَذَ مَضْجَعَهُ قَالَ: )اللَّهُمَّ خَلَقْتَ نَفْسِي وَأَنْتَ تَوَفَّاهَا، لَكَ مَمَاتُهَا وَمَحْيَاهَا، إِنْ أَحْيَيْتَهَا فَاحْفَظْهَا، وَإِنْ أَمَتَّهَا فَاغْفِرْ لَهَا، اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَافِيَةَ( فَقَالَ لَهُ رَجُلٌ: أَسَمِعْتَ هَذَا مِنْ عُمَرَ؟ فَقَالَ: مِنْ خَيْرٍ مِنْ عُمَرَ، مِنْ رَسُولِ اللَّهِ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ.  رواه مسلم (2712)." },
+      { text: "اللَّهُمَّ قِنِى عَذَابَكَ يَوْمَ تَبْعَثُ عِبَادَكَ", repeat: 3, label: "عَنْ حَفْصَةَ رضي الله عنها أَنَّ رَسُولَ اللَّهِ صلى الله عليه وسلم كَانَ إِذَا أَرَادَ أَنْ يَرْقُدَ وَضَعَ يَدَهُ الْيُمْنَى تَحْتَ خَدِّهِ ثُمَّ يَقُولُ: )اللَّهُمَّ قِنِى عَذَابَكَ يَوْمَ تَبْعَثُ عِبَادَكَ ثَلاَثَ مِرَارٍ.( رواه أبو داود (5045)" },
+      { text: "اللَّهُمَّ رَبَّ السَّمَاوَاتِ وَرَبَّ الْأَرْضِ وَرَبَّ الْعَرْشِ الْعَظِيمِ، رَبَّنَا وَرَبَّ كُلِّ شَيْءٍ، فَالِقَ الْحَبِّ وَالنَّوَى، وَمُنْزِلَ التَّوْرَاةِ وَالْإِنْجِيلِ وَالْفُرْقَانِ، أَعُوذُ بِكَ مِنْ شَرِّ كُلِّ شَيْءٍ أَنْتَ آخِذٌ بِنَاصِيَتِهِ، اللَّهُمَّ أَنْتَ الْأَوَّلُ فَلَيْسَ قَبْلَكَ شَيْءٌ، وَأَنْتَ الْآخِرُ فَلَيْسَ بَعْدَكَ شَيْءٌ، وَأَنْتَ الظَّاهِرُ فَلَيْسَ فَوْقَكَ شَيْءٌ، وَأَنْتَ الْبَاطِنُ فَلَيْسَ دُونَكَ شَيْءٌ، اقْضِ عَنَّا الدَّيْنَ، وَأَغْنِنَا مِنْ الْفَقْرِ", repeat: 1, label: "عن سهيل قال: كَانَ أَبُو صَالِحٍ يَأْمُرُنَا - إِذَا أَرَادَ أَحَدُنَا أَنْ يَنَامَ - أَنْ يَضْطَجِعَ عَلَى شِقِّهِ الْأَيْمَنِ ثُمَّ يَقُولُ: (اللَّهُمَّ رَبَّ السَّمَاوَاتِ وَرَبَّ الْأَرْضِ وَرَبَّ الْعَرْشِ الْعَظِيمِ، رَبَّنَا وَرَبَّ كُلِّ شَيْءٍ، فَالِقَ الْحَبِّ وَالنَّوَى، وَمُنْزِلَ التَّوْرَاةِ وَالْإِنْجِيلِ وَالْفُرْقَانِ، أَعُوذُ بِكَ مِنْ شَرِّ كُلِّ شَيْءٍ أَنْتَ آخِذٌ بِنَاصِيَتِهِ، اللَّهُمَّ أَنْتَ الْأَوَّلُ فَلَيْسَ قَبْلَكَ شَيْءٌ، وَأَنْتَ الْآخِرُ فَلَيْسَ بَعْدَكَ شَيْءٌ، وَأَنْتَ الظَّاهِرُ فَلَيْسَ فَوْقَكَ شَيْءٌ، وَأَنْتَ الْبَاطِنُ فَلَيْسَ دُونَكَ شَيْءٌ، اقْضِ عَنَّا الدَّيْنَ، وَأَغْنِنَا مِنْ الْفَقْرِ) وَكَانَ يَرْوِي ذَلِكَ عَنْ أَبِي هُرَيْرَةَ عَنْ النَّبِيِّ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ. رواه مسلم (2713)." },
+      { text: "اللَّهُمَّ إِنِّي أَعُوذُ بِوَجْهِكَ الْكَرِيمِ وَكَلِمَاتِكَ التَّامَّةِ مِنْ شَرِّ مَا أَنْتَ آخِذٌ بِنَاصِيَتِهِ، اللَّهُمَّ أَنْتَ تَكْشِفُ الْمَغْرَمَ وَالْمَأْثَمَ، اللَّهُمَّ لَا يُهْزَمُ جُنْدُكَ، وَلَا يُخْلَفُ وَعْدُكَ، وَلَا يَنْفَعُ ذَا الْجَدِّ مِنْكَ الْجَدُّ، سُبْحَانَكَ وَبِحَمْدِكَ", repeat: 1, label: "عَنْ عَلِيٍّ رضي الله عنه عَنْ رَسُولِ اللَّهِ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ أَنَّهُ كَانَ يَقُولُ عِنْدَ مَضْجَعِهِ: (اللَّهُمَّ إِنِّي أَعُوذُ بِوَجْهِكَ الْكَرِيمِ وَكَلِمَاتِكَ التَّامَّةِ مِنْ شَرِّ مَا أَنْتَ آخِذٌ بِنَاصِيَتِهِ، اللَّهُمَّ أَنْتَ تَكْشِفُ الْمَغْرَمَ وَالْمَأْثَمَ، اللَّهُمَّ لَا يُهْزَمُ جُنْدُكَ، وَلَا يُخْلَفُ وَعْدُكَ، وَلَا يَنْفَعُ ذَا الْجَدِّ مِنْكَ الْجَدُّ، سُبْحَانَكَ وَبِحَمْدِكَ) رواه أبو داود (5052)" },
+      { text: "اللَّهُمَّ أَسْلَمْتُ وَجْهِي إِلَيْكَ: وَفَوَّضْتُ أَمْرِي إِلَيْكَ، وَأَلْجَأْتُ ظَهْرِي إِلَيْكَ، رَغْبَةً وَرَهْبَةً إِلَيْكَ، لَا مَلْجَأَ وَلَا مَنْجَا مِنْكَ إِلَّا إِلَيْكَ، اللَّهُمَّ آمَنْتُ بِكِتَابِكَ الَّذِي أَنْزَلْتَ، وَبِنَبِيِّكَ الَّذِي أَرْسَلْتَ", repeat: 1, label: "عَنْ الْبَرَاءِ بْنِ عَازِبٍ قَالَ: (قَالَ النَّبِيُّ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ: إِذَا أَتَيْتَ مَضْجَعَكَ فَتَوَضَّأْ وُضُوءَكَ لِلصَّلَاةِ، ثُمَّ اضْطَجِعْ عَلَى شِقِّكَ الْأَيْمَنِ، ثُمَّ قُلْ: (اللَّهُمَّ أَسْلَمْتُ وَجْهِي إِلَيْكَ: وَفَوَّضْتُ أَمْرِي إِلَيْكَ، وَأَلْجَأْتُ ظَهْرِي إِلَيْكَ، رَغْبَةً وَرَهْبَةً إِلَيْكَ، لَا مَلْجَأَ وَلَا مَنْجَا مِنْكَ إِلَّا إِلَيْكَ، اللَّهُمَّ آمَنْتُ بِكِتَابِكَ الَّذِي أَنْزَلْتَ، وَبِنَبِيِّكَ الَّذِي أَرْسَلْتَ.) فَإِنْ مُتَّ مِنْ لَيْلَتِكَ فَأَنْتَ عَلَى الْفِطْرَةِ، وَاجْعَلْهُنَّ آخِرَ مَا تَتَكَلَّمُ بِهِ، قَالَ: فَرَدَّدْتُهَا عَلَى النَّبِيِّ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ، فَلَمَّا بَلَغْتُ: اللَّهُمَّ آمَنْتُ بِكِتَابِكَ الَّذِي أَنْزَلْتَ. قُلْتُ: وَرَسُولِكَ. قَالَ: لَا، وَنَبِيِّكَ الَّذِي أَرْسَلْتَ.) رواه البخاري (247)، ومسلم (2710)." },
+    ]
+  },
+  general: {
+    title: "أدعية من القرآن والسنة",
+    completionMsg: "أحَبُّ الأعْمالِ إلى اللَّهِ أدْوَمُها وإنْ قَلَّ",
+    completionIcon: "🤲",
+    list: [
+      { text: "اللَّهُمَّ رَبَّنَا لكَ الحَمْدُ، مِلْءُ السَّمَوَاتِ ومِلْءُ الأرْضِ، وما بيْنَهُمَا، ومِلْءُ ما شِئْتَ مِن شيءٍ بَعْدُ، أهْلَ الثَّنَاءِ والْمَجْدِ، لا مَانِعَ لِما أعْطَيْتَ، ولَا مُعْطِيَ لِما مَنَعْتَ، ولَا يَنْفَعُ ذَا الجَدِّ مِنْكَ الجَدُّ", repeat: 1, label: "عن عبدالله بن عباس أنَّ النبيَّ صَلَّى اللَّهُ عليه وسلَّمَ كانَ إذَا رَفَعَ رَأْسَهُ مِنَ الرُّكُوعِ، قالَ: اللَّهُمَّ رَبَّنَا لكَ الحَمْدُ، مِلْءُ السَّمَوَاتِ ومِلْءُ الأرْضِ، وما بيْنَهُمَا، ومِلْءُ ما شِئْتَ مِن شيءٍ بَعْدُ، أهْلَ الثَّنَاءِ والْمَجْدِ، لا مَانِعَ لِما أعْطَيْتَ، ولَا مُعْطِيَ لِما مَنَعْتَ، ولَا يَنْفَعُ ذَا الجَدِّ مِنْكَ الجَدُّ.[وفي رواية] عَنِ النبيِّ صَلَّى اللَّهُ عليه وسلَّمَ إلى قَوْلِهِ ومِلْءُ ما شِئْتَ مِن شيءٍ بَعْدُ ولَمْ يَذْكُرْ ما بَعْدَهُ. رواه مسلم (478)" },
+      { text: "رَبِّ ٱبْنِ لِى عِندَكَ بَيْتًۭا فِى ٱلْجَنَّةِ", repeat: 1, label: "سورة التحريم (11)" },
+      { text: "رَبَّنَا ٱصْرِفْ عَنَّا عَذَابَ جَهَنَّمَ ۖ إِنَّ عَذَابَهَا كَانَ غَرَامًا ", repeat: 1, label: "سورة الفرقان (65)" },
+      { text: "رَبَّنَا ٱغْفِرْ لَنَا ذُنُوبَنَا وَإِسْرَافَنَا فِىٓ أَمْرِنَا وَثَبِّتْ أَقْدَامَنَا وَٱنصُرْنَا عَلَى ٱلْقَوْمِ ٱلْكَـٰفِرِينَ ", repeat: 1, label: "سورة آل عمران (147)" },
+      { text: "رَبَّنَآ ءَامَنَّا فَٱغْفِرْ لَنَا وَٱرْحَمْنَا وَأَنتَ خَيْرُ ٱلرَّٰحِمِينَ ", repeat: 1, label: "سورة المؤمنون (109)" },
+      { text: "رَبِّ اغْفِرْ لي خَطِيئَتي وجَهْلِي، وإسْرَافِي في أمْرِي كُلِّهِ، وما أنْتَ أعْلَمُ به مِنِّي، اللَّهُمَّ اغْفِرْ لي خَطَايَايَ، وعَمْدِي وجَهْلِي وهَزْلِي، وكُلُّ ذلكَ عِندِي، اللَّهُمَّ اغْفِرْ لي ما قَدَّمْتُ وما أخَّرْتُ، وما أسْرَرْتُ وما أعْلَنْتُ، أنْتَ المُقَدِّمُ وأَنْتَ المُؤَخِّرُ، وأَنْتَ علَى كُلِّ شيءٍ قَدِيرٌ", repeat: 1, label: "عن أبي موسى الأشعري عن النبي صلى الله عليه وسلم أنه كان يدعو بهذا الدعاء. رواه البخاري (6398) ومسلم (2719)" },
+      { text: "اللَّهُمَّ إنَّا نَعُوذُ بكَ مِن عَذَابِ جَهَنَّمَ، وَأَعُوذُ بكَ مِن عَذَابِ القَبْرِ، وَأَعُوذُ بكَ مِن فِتْنَةِ المَسِيحِ الدَّجَّالِ، وَأَعُوذُ بكَ مِن فِتْنَةِ المَحْيَا وَالْمَمَاتِ (ويقرا في الصلاة قبل التسليم)", repeat: 1, label: "عن عبدالله بن عباس: أنَّ رَسولَ اللهِ صَلَّى اللَّهُ عليه وسلَّمَ كانَ يُعَلِّمُهُمْ هذا الدُّعَاءَ كما يُعَلِّمُهُمُ السُّورَةَ مِنَ القُرْآنِ يقولُ قُولوا: اللَّهُمَّ إنَّا نَعُوذُ بكَ مِن عَذَابِ جَهَنَّمَ، وَأَعُوذُ بكَ مِن عَذَابِ القَبْرِ، وَأَعُوذُ بكَ مِن فِتْنَةِ المَسِيحِ الدَّجَّالِ، وَأَعُوذُ بكَ مِن فِتْنَةِ المَحْيَا وَالْمَمَاتِ. رواه مسلم (590)\nروى مسلم ( 588 ) عَنْ أَبِى هُرَيْرَةَ قَالَ : قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم : ( إِذَا تَشَهَّدَ أَحَدُكُمْ فَلْيَسْتَعِذْ بِاللَّهِ مِنْ أَرْبَعٍ ، يَقُولُ : اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ عَذَابِ جَهَنَّمَ ، وَمِنْ عَذَابِ الْقَبْرِ ، وَمِنْ فِتْنَةِ الْمَحْيَا وَالْمَمَاتِ ، وَمِنْ شَرِّ فِتْنَةِ الْمَسِيحِ الدَّجَّالِ ) ." },
+      { text: "اللَّهمَّ اهدِني فيمن هديت، وعافِني فيمن عافيتَ، وتولَّني فيمن تولَّيتَ، وبارِك لي فيما أعطيتَ، وقني شرَّ ما قضيتَ، إنَّكَ تقضي ولا يقضى عليْكَ، وإنَّهُ لا يذلُّ من واليتَ، ولا يعزُّ من عاديتَ، تبارَكتَ ربَّنا وتعاليتَ", repeat: 1, label: "عن الحسنِ بنِ عليٍّ رضيَ الله عنْهما، قال : علَّمني رسولُ صلَّى عليْهِ وسلَّمَ كلماتٍ أقولُهنَّ في الوترِ، - قالَ ابنُ جوَّاسٍ: في قنوتِ الوترِ اللَّهمَّ اهدِني فيمن هديت، وعافِني فيمن عافيتَ، وتولَّني فيمن تولَّيتَ، وبارِك لي فيما أعطيتَ، وقني شرَّ ما قضيتَ، إنَّكَ تقضي ولا يقضى عليْكَ، وإنَّهُ لا يذلُّ من واليتَ، ولا يعزُّ من عاديتَ، تبارَكتَ ربَّنا وتعاليتَ. أخرجه أبو داود (1425)، والترمذي (464)، والنسائي (1745) وابن ماجه (1178)، وأحمد (1718) باختلاف يسير." },
+      { text: "رَبَّنَا لَا تُزِغْ قُلُوبَنَا بَعْدَ إِذْ هَدَيْتَنَا وَهَبْ لَنَا مِن لَّدُنكَ رَحْمَةً ۚ إِنَّكَ أَنتَ ٱلْوَهَّابُ ", repeat: 1, label: "سورة آل عمران (8)" },
+      { text: " رَبَّنَآ ءَاتِنَا مِن لَّدُنكَ رَحْمَةًۭ وَهَيِّئْ لَنَا مِنْ أَمْرِنَا رَشَدًۭا ", repeat: 1, label: "سورة الكهف (10)" },
+      { text: "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ", repeat: 1, label: "سورة البقرة (201)" },
+      { text: "اللهمَّ إنِّي أسألُك من الخيرِ كلِّه عاجلِه وآجلِه ما علِمتُ منه وما لم أعلمُ ، وأعوذُ بك من الشرِّ كلِّه عاجلِه وآجلِه ما علِمتُ منه وما لم أعلمُ . اللهمَّ إنِّي أسألُك من خيرِ ما سألَك به عبدُك ونبيُّك ، وأعوذُ بك من شرِّ ما عاذ به عبدُك ونبيُّك . اللهمَّ إنِّي أسألُك الجنةَ وما قرَّب إليها من قولٍ أو عملٍ ، وأعوذُ بك من النارِ وما قرَّب إليها من قولٍ أو عملٍ ، وأسألُك أنْ تجعلَ كلَّ قضاءٍ قضيتَه لي خيرًا ", repeat: 1, label: "رواه أحمد (24498) وابن ماجة (3846)" },
+      { text: "رَبِّ أَوْزِعْنِىٓ أَنْ أَشْكُرَ نِعْمَتَكَ ٱلَّتِىٓ أَنْعَمْتَ عَلَىَّ وَعَلَىٰ وَٰلِدَىَّ وَأَنْ أَعْمَلَ صَـٰلِحًۭا تَرْضَىٰهُ وَأَصْلِحْ لِى فِى ذُرِّيَّتِىٓ ۖ إِنِّى تُبْتُ إِلَيْكَ وَإِنِّى مِنَ ٱلْمُسْلِمِينَ ", repeat: 1, label: "سورة الأحقاف (15)" },
+      { text: "رَّبِّ ٱغْفِرْ لِى وَلِوَٰلِدَىَّ وَلِمَن دَخَلَ بَيْتِىَ مُؤْمِنًۭا وَلِلْمُؤْمِنِينَ وَٱلْمُؤْمِنَـٰتِ وَلَا تَزِدِ ٱلظَّـٰلِمِينَ إِلَّا تَبَارًۢا ", repeat: 1, label: "سورة نوح (28)" },
+      { text: "اللَّهُمَّ أَصْلِحْ لي دِينِي الذي هو عِصْمَةُ أَمْرِي، وَأَصْلِحْ لي دُنْيَايَ الَّتي فِيهَا معاشِي، وَأَصْلِحْ لي آخِرَتي الَّتي فِيهَا معادِي، وَاجْعَلِ الحَيَاةَ زِيَادَةً لي في كُلِّ خَيْرٍ، وَاجْعَلِ المَوْتَ رَاحَةً لي مِن كُلِّ شَرٍّ", repeat: 1, label: "عن أبي هريرة رضي الله عنه: كان رسول الله صلى الله عليه وسلم يقول: كانَ رَسولُ اللهِ صَلَّى اللَّهُ عليه وَسَلَّمَ يقولُ: اللَّهُمَّ أَصْلِحْ لي دِينِي الذي هو عِصْمَةُ أَمْرِي، وَأَصْلِحْ لي دُنْيَايَ الَّتي فِيهَا معاشِي، وَأَصْلِحْ لي آخِرَتي الَّتي فِيهَا معادِي، وَاجْعَلِ الحَيَاةَ زِيَادَةً لي في كُلِّ خَيْرٍ، وَاجْعَلِ المَوْتَ رَاحَةً لي مِن كُلِّ شَرٍّ. رواه مسلم (2720)" },
+      { text: "اللَّهُمَّ إنِّي أعُوذُ بكَ مِنَ الهَمِّ والحَزَنِ، والعَجْزِ والكَسَلِ، والبُخْلِ والجُبْنِ، وضَلَعِ الدَّيْنِ، وغَلَبَةِ الرِّجَالِ", repeat: 1, label: "رواه البخاري (2893) " },
+      { text: "اللَّهُمَّ إنِّي أَعُوذُ بكَ مِنَ العَجْزِ وَالْكَسَلِ، وَالْجُبْنِ وَالْبُخْلِ، وَالْهَرَمِ، وَعَذَابِ القَبْرِ، اللَّهُمَّ آتِ نَفْسِي تَقْوَاهَا، وَزَكِّهَا أَنْتَ خَيْرُ مَن زَكَّاهَا، أَنْتَ وَلِيُّهَا وَمَوْلَاهَا، اللَّهُمَّ إنِّي أَعُوذُ بكَ مِن عِلْمٍ لا يَنْفَعُ، وَمِنْ قَلْبٍ لا يَخْشَعُ، وَمِنْ نَفْسٍ لا تَشْبَعُ، وَمِنْ دَعْوَةٍ لا يُسْتَجَابُ لَهَا", repeat: 1, label: "عن زيد بن أرقم: لَا أَقُولُ لَكُمْ إلَّا كما كانَ رَسولُ اللهِ صَلَّى اللَّهُ عليه وَسَلَّمَ يقولُ؛ كانَ يقولُ: اللَّهُمَّ إنِّي أَعُوذُ بكَ مِنَ العَجْزِ وَالْكَسَلِ، وَالْجُبْنِ وَالْبُخْلِ، وَالْهَرَمِ، وَعَذَابِ القَبْرِ، اللَّهُمَّ آتِ نَفْسِي تَقْوَاهَا، وَزَكِّهَا أَنْتَ خَيْرُ مَن زَكَّاهَا، أَنْتَ وَلِيُّهَا وَمَوْلَاهَا، اللَّهُمَّ إنِّي أَعُوذُ بكَ مِن عِلْمٍ لا يَنْفَعُ، وَمِنْ قَلْبٍ لا يَخْشَعُ، وَمِنْ نَفْسٍ لا تَشْبَعُ، وَمِنْ دَعْوَةٍ لا يُسْتَجَابُ لَهَا. رواه مسلم (2722)" },
+      { text: "اللَّهُمَّ إنِّي أَعُوذُ بكَ مِن زَوَالِ نِعْمَتِكَ، وَتَحَوُّلِ عَافِيَتِكَ، وَفُجَاءَةِ نِقْمَتِكَ، وَجَمِيعِ سَخَطِكَ", repeat: 1, label: "عن عبدالله بن عمر: كانَ مِن دُعَاءِ رَسُولِ اللهِ صَلَّى اللَّهُ عليه وَسَلَّمَ: اللَّهُمَّ إنِّي أَعُوذُ بكَ مِن زَوَالِ نِعْمَتِكَ، وَتَحَوُّلِ عَافِيَتِكَ، وَفُجَاءَةِ نِقْمَتِكَ، وَجَمِيعِ سَخَطِكَ. رواه مسلم (2739)" },
+      { text: "اللَّهمَّ إنِّي أعوذُ بِكَ منَ البرصِ والجنونِ والجذامِ ومن سيِّئِ الأسقامِ", repeat: 1, label: "أخرجه أبو داود (1554)، وأحمد (13027) واللفظ لهما، والنسائي (5493) باختلاف يسير" },
+      { text: "أعوذُ باللَّهِ مِنَ الفِتَنِ ما ظَهَرَ منها وَما بَطَنَ", repeat: 1, label: "رواه مسلم (2867)" },
+      { text: "اللهمَّ إنِّي عبدُك، ابنُ عبدِك، ابنُ أمَتِك، ناصيتي بيدِك، ماضٍ فيَّ حُكمُك، عدلٌ فيَّ قضاؤُك، أسألُك اللهمَّ بكلِّ اسمٍ هو لك سمَّيتَ به نفسَك، أو أنزلته في كتابِك، أو علَّمته أحدًا مِن خلقِك، أو استأثرت به في علمِ الغيبِ عندَك، أن تجعلَ القرآنَ ربيعَ قلبِي ، ونورَ صدرِي، وجلاءَ حزني، وذَهابَ همِّي وغمِّي", repeat: 1, label: "قال رسول الله صلى الله عليه وسلم: (( ما أصاب أحدا قط هم ولا حزن، فقال: اللهم إني عبدك، ابن عبدك، ابن أمتك ناصيتي بيدك، ماض في حكمك، عدل في قضاؤك، أسألك بكل اسم هو لك سميت به نفسك، أو علمته أحدا من خلقك، أو أنزلته في كتابك، أو استأثرت به في علم الغيب عندك، أن تجعل القرآن ربيع قلبي، ونور صدري، وجلاء حزني، وذهاب همي، إلا أذهب الله همه وحزنه، وأبدله مكانه فرحا))، قال: فقيل: يا رسول الله، ألا نتعلمها؟ فقال: (( بلى، ينبغي لمن سمعها أن يتعلمها)). أخرجه أحمد (3712) واللفظ له، وابن حبان (972)، والبزار (1994) باختلاف يسير." },
+      { text: "اللَّهُمَّ إنِّي أَسْأَلُكَ الهُدَى وَالتُّقَى، وَالْعَفَافَ وَالْغِنَى", repeat: 1, label: "رواه مسلم (2721)" },
+      { text: "اللَّهُمَّ صَلِّ علَى مُحَمَّدٍ، وعلَى آلِ مُحَمَّدٍ، كما صَلَّيْتَ علَى آلِ إبْرَاهِيمَ، إنَّكَ حَمِيدٌ مَجِيدٌ، اللَّهُمَّ بَارِكْ علَى مُحَمَّدٍ، وعلَى آلِ مُحَمَّدٍ، كما بَارَكْتَ علَى آلِ إبْرَاهِيمَ، إنَّكَ حَمِيدٌ مَجِيدٌ", repeat: 1, label: "رواه البخاري (6357) ومسلم (406)" },
+    ]
+  }
+};
+
+let currentType = null;
+let currentDhikr = 0;
+let currentCount = 0;
+let activeAdhkar = [];
+let deferredPrompt = null;
+let currentTheme = 'morning';
+let isTapping = false;
+
+function setTheme(theme) {
+  currentTheme = theme;
+  localStorage.setItem('adhkar-theme', theme);
+  document.body.classList.toggle('theme-morning', theme === 'morning');
+  document.getElementById('pillMorning').classList.toggle('active', theme === 'morning');
+  document.getElementById('pillEvening').classList.toggle('active', theme === 'evening');
+}
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function init() {
+  // Load saved theme
+  const savedTheme = localStorage.getItem('adhkar-theme') || 'morning';
+  setTheme(savedTheme);
+
+  // Stars
+  const sc = document.getElementById('stars');
+  for (let i = 0; i < 30; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;--dur:${2+Math.random()*4}s;--delay:${Math.random()*3}s;`;
+    sc.appendChild(s);
+  }
+
+  // PWA install prompt
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    setTimeout(() => document.getElementById('installBanner').classList.add('show'), 2000);
+  });
+
+  document.getElementById('installBtn').addEventListener('click', async () => {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    deferredPrompt = null;
+    document.getElementById('installBanner').classList.remove('show');
+  });
+
+  document.getElementById('dismissBtn').addEventListener('click', () => {
+    document.getElementById('installBanner').classList.remove('show');
+  });
+
+  window.addEventListener('appinstalled', () => {
+    document.getElementById('installBanner').classList.remove('show');
+  });
+}
+
+function startDhikr(type) {
+  currentType = type;
+  currentDhikr = 0;
+  currentCount = 0;
+  activeAdhkar = allAdhkar[type].list;
+
+  document.getElementById('headerTitle').textContent = allAdhkar[type].title;
+
+  // Apply current theme
+  document.body.classList.toggle('theme-morning', currentTheme === 'morning');
+
+  // Hide toggle btn (no longer in header)
+  const toggleBtn = document.getElementById('toggleBtn');
+  toggleBtn.classList.remove('visible');
+
+  const dots = document.getElementById('dotIndicators');
+  dots.innerHTML = '';
+  activeAdhkar.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === 0 ? ' current' : '');
+    d.id = `dot-${i}`;
+    dots.appendChild(d);
+  });
+
+  showScreen('dhikrScreen');
+  renderCurrent();
+}
+function fitText() {
+  const card = document.getElementById('dhikrCard');
+  const text = document.getElementById('dhikrText');
+  text.style.fontSize = 'var(--fs-dhikr)'; // reset first
+  while (text.scrollHeight > card.clientHeight * 0.8 && parseFloat(getComputedStyle(text).fontSize) > 12) {
+    text.style.fontSize = (parseFloat(getComputedStyle(text).fontSize) - 0.5) + 'px';
+  }
+}
+function renderCurrent() {
+  const dhikr = activeAdhkar[currentDhikr];
+  document.getElementById('cardNumber').textContent = `${currentDhikr + 1} / ${activeAdhkar.length}`;
+  document.getElementById('dhikrText').textContent = dhikr.text;
+
+  // Show label only, hide "مرة واحدة"
+  const repeatText = dhikr.repeat > 1 ? `${dhikr.repeat} ${dhikr.repeat >= 11 ? 'مرة' : 'مرات'}  •  ` : '';
+  document.getElementById('repeatInfo').textContent = repeatText + 'المصدر';
+  document.getElementById('sourceText').textContent = dhikr.source || dhikr.label;
+  fitText();
+
+  // Close source box on navigation
+  document.getElementById('sourceBox').classList.remove('open');
+
+  document.getElementById('countCurrent').textContent = currentCount;
+  document.getElementById('countTotal').textContent = dhikr.repeat;
+
+  document.getElementById('progressFill').style.width = (currentDhikr / activeAdhkar.length * 100) + '%';
+
+  // Update dots
+  activeAdhkar.forEach((_, i) => {
+    const dot = document.getElementById(`dot-${i}`);
+    if (!dot) return;
+    dot.className = 'dot';
+    if (i < currentDhikr) dot.classList.add('done');
+    else if (i === currentDhikr) dot.classList.add('current');
+  });
+
+  // Arrow buttons state
+  document.getElementById('prevBtn').disabled = currentDhikr === 0;
+  document.getElementById('nextBtn').disabled = currentDhikr === activeAdhkar.length - 1;
+
+  const card = document.getElementById('dhikrCard');
+  card.classList.remove('slide-in');
+  void card.offsetWidth;
+  card.classList.add('slide-in');
+}
+
+function toggleSource() {
+  const box = document.getElementById('sourceBox');
+  const screen = document.getElementById('dhikrScreen');
+  box.classList.toggle('open');
+  screen.classList.toggle('source-open');
+}
+
+function navigateDhikr(dir) {
+  const next = currentDhikr + dir;
+  if (next < 0 || next >= activeAdhkar.length) return;
+  currentCount = 0;
+  currentDhikr = next;
+  renderCurrent();
+}
+
+function handleTap() {
+  
+  if (isTapping) return;
+  if (currentCount >= activeAdhkar[currentDhikr].repeat) return;
+
+  currentCount++;
+
+  const countEl = document.getElementById('countCurrent');
+  countEl.textContent = currentCount;
+  countEl.classList.remove('count-bounce');
+  void countEl.offsetWidth;
+  countEl.classList.add('count-bounce');
+
+  const btn = document.getElementById('tapBtn');
+  const ripple = document.createElement('div');
+  ripple.className = 'ripple';
+  btn.appendChild(ripple);
+  setTimeout(() => ripple.remove(), 500);
+
+  if (currentCount >= activeAdhkar[currentDhikr].repeat) {
+    btn.classList.add('pulse-anim');
+    setTimeout(() => btn.classList.remove('pulse-anim'), 600);
+    setTimeout(() => {
+      currentCount = 0;
+      currentDhikr++;
+      if (currentDhikr >= activeAdhkar.length) showCompletion();
+      else renderCurrent();
+    }, 400);
+  }
+}
+
+function showCompletion() {
+  const data = allAdhkar[currentType];
+  document.getElementById('progressFill').style.width = '100%';
+  activeAdhkar.forEach((_, i) => {
+    const dot = document.getElementById(`dot-${i}`);
+    if (dot) dot.className = 'dot done';
+  });
+  document.getElementById('completionIcon').textContent = data.completionIcon;
+  document.getElementById('completionSubtitle').innerHTML =
+    `أتممتَ ${data.title}<br><span style="color:var(--gold);font-family:'Amiri',serif;font-size:1.1rem;">${data.completionMsg}</span>`;
+  showScreen('completionScreen');
+}
+
+function restartDhikr() {
+  currentDhikr = 0;
+  currentCount = 0;
+  showScreen('dhikrScreen');
+  renderCurrent();
+}
+
+function goBack() { showScreen('selectionScreen'); }
+function goHome() { showScreen('selectionScreen'); }
+
+document.addEventListener('keydown', (e) => {
+  if (!document.getElementById('dhikrScreen').classList.contains('active')) return;
+  if (e.code === 'Space' || e.code === 'Enter') { e.preventDefault(); handleTap(); }
+  if (e.code === 'ArrowRight') navigateDhikr(1);
+  if (e.code === 'ArrowLeft') navigateDhikr(-1);
+});
+
+init();
+
+// Register Service Worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  });
+}
+
+function shareApp() {
+  const isMobile = /Android|iPhone|iPad/i.test(navigator.userAgent);
+  if (navigator.share && isMobile) {
+    navigator.share({
+      title: 'الأذكار والأدعية',
+      text: 'تطبيق للأذكار اليومية',
+      url: window.location.href
+    });
+  } else {
+    navigator.clipboard.writeText(window.location.href)
+      .then(() => alert('تم نسخ الرابط!'));
+  }
+}
+
+</script>
+</body>
+</html>

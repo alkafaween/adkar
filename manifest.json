@@ -1,0 +1,20 @@
+{
+  "name": "الأذكار والأدعية",
+  "short_name": "الأذكار",
+  "description": "مسبحة إلكترونية لأذكار الصباح والمساء والنوم",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0d1a0f",
+  "theme_color": "#0d1a0f",
+  "orientation": "portrait",
+  "lang": "ar",
+  "dir": "rtl",
+"icons": [
+  {
+    "src": "pattern.png",
+    "sizes": "512x512",
+    "type": "image/png",
+    "purpose": "any"
+  }
+]
+}
